@@ -26,16 +26,15 @@ const defaultSections: FooterSection[] = [
   {
     title: "Resources",
     links: [
-      { label: "Google Drive", href: "#" },
+      { label: "Google Drive", href: "https://drive.google.com/drive/folders/1UhHMdUBfGVrofgoA9l1Q42uG7dglZ7lq?usp=drive_link" },
       { label: "Members Profile", href: "/profile" },
-      { label: "Pricing", href: "#" },
-      { label: "Tutorials", href: "#" },
+      { label: "Mata Kuliah", href: "/matkul" },
     ],
   },
 ];
 
 const Footer: React.FC<FooterProps> = ({
-  companyName = "Your Company",
+  companyName = "SI-F'23 ",
   description = "Making the world a better place through constructing elegant hierarchies.",
   sections = defaultSections,
   contactInfo = {
@@ -52,36 +51,6 @@ const Footer: React.FC<FooterProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
           {/* Company Info */}
-          <div className="lg:col-span-2">
-            <h2 className="text-white text-xl font-bold mb-4">{companyName}</h2>
-            <p className="text-gray-400 mb-6">{description}</p>
-
-            {/* Contact Information */}
-            <div className="space-y-3">
-              {contactInfo.email && (
-                <div className="flex items-center">
-                  <Mail className="h-5 w-5 mr-2 text-gray-400" />
-                  <a href={`mailto:${contactInfo.email}`} className="hover:text-white transition-colors">
-                    {contactInfo.email}
-                  </a>
-                </div>
-              )}
-              {contactInfo.phone && (
-                <div className="flex items-center">
-                  <Phone className="h-5 w-5 mr-2 text-gray-400" />
-                  <a href={`tel:${contactInfo.phone}`} className="hover:text-white transition-colors">
-                    {contactInfo.phone}
-                  </a>
-                </div>
-              )}
-              {contactInfo.address && (
-                <div className="flex items-center">
-                  <MapPin className="h-5 w-5 mr-2 text-gray-400" />
-                  <span>{contactInfo.address}</span>
-                </div>
-              )}
-            </div>
-          </div>
 
           {/* Footer Sections */}
           {sections.map((section, index) => (
@@ -119,7 +88,7 @@ const Footer: React.FC<FooterProps> = ({
             </div>
 
             <p className="text-gray-400 text-sm">
-              © {currentYear} {companyName}. All rights reserved.
+              © {currentYear} {companyName}
             </p>
           </div>
         </div>
