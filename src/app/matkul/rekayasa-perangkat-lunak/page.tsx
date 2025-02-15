@@ -26,9 +26,9 @@ const courseData = {
       description: "Pengenalan konsep dasar RPL dan siklus hidup pengembangan perangkat lunak",
       materials: [
         {
-          name: "Slide RPL",
-          type: "pdf",
-          url: "/materials/rpl/week1/slides.pdf",
+          name: "Rangkuman RPL B Indo",
+          type: "zip",
+          url: "/matkul/RPL/ringkasan-software-engineer.zip",
         },
         {
           name: "Tutorial Git",

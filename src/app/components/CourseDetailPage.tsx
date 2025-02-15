@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -14,6 +16,12 @@ interface Meeting {
     type: string;
     url: string;
   }[];
+}
+
+interface Material {
+  name: string;
+  type: string;
+  url: string;
 }
 
 interface CourseDetailProps {
@@ -41,6 +49,20 @@ interface CourseDetailProps {
 }
 
 const CourseDetailPage: React.FC<CourseDetailProps> = ({ course }) => {
+  const handleDownload = (url: string, fileName: string) => {
+    // Create an anchor element
+    const link = document.createElement("a");
+    link.href = url;
+
+    // Set the download attribute with the filename
+    link.setAttribute("download", fileName || url.split("/").pop() || "material");
+
+    // Append to body, click, and remove
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -114,7 +136,7 @@ const CourseDetailPage: React.FC<CourseDetailProps> = ({ course }) => {
                                     <FileText className="w-5 h-5 mr-2 text-blue-600" />
                                     <span>{material.name}</span>
                                   </div>
-                                  <Button size="sm" variant="outline">
+                                  <Button size="sm" variant="outline" onClick={() => handleDownload(material.url, `${material.name}.${material.type}`)}>
                                     <Download className="w-4 h-4 mr-1" />
                                     Download
                                   </Button>

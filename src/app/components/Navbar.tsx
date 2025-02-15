@@ -15,8 +15,8 @@ interface NavbarProps {
 }
 
 const defaultMenuItems: MenuItem[] = [
-  { title: "Home", link: "#" },
-  { title: "Showcase", link: "#" },
+  { title: "Home", link: "/" },
+  { title: "Showcase", link: "showcase" },
   { title: "About", link: "/about" },
 ];
 
