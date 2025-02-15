@@ -30,11 +30,6 @@ const courseData = {
           type: "zip",
           url: "/matkul/RPL/ringkasan-software-engineer.zip",
         },
-        {
-          name: "Tutorial Git",
-          type: "pdf",
-          url: "/materials/rpl/week1/git-tutorial.pdf",
-        },
       ],
     },
   ],

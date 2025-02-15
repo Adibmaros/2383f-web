@@ -13,19 +13,34 @@ interface CarouselProps {
 
 const defaultImages = [
   {
-    url: "/api/placeholder/800/400",
+    url: "/photos/foto1.jpeg",
     alt: "Slide 1",
-    title: "Beautiful Mountain Landscape",
+    title: "Last with Mr. Andi",
   },
   {
-    url: "/api/placeholder/800/400",
+    url: "/photos/foto2.jpeg",
     alt: "Slide 2",
-    title: "Serene Beach Sunset",
+    title: "Algoritma Days ",
   },
   {
-    url: "/api/placeholder/800/400",
+    url: "/photos/foto3.jpg",
     alt: "Slide 3",
-    title: "Urban City Life",
+    title: "What a clothes!",
+  },
+  {
+    url: "/photos/foto4.jpg",
+    alt: "Slide 3",
+    title: "Nice girls",
+  },
+  {
+    url: "/photos/foto5.jpg",
+    alt: "Slide 3",
+    title: "What the freak!",
+  },
+  {
+    url: "/photos/foto6.jpg",
+    alt: "Slide 3",
+    title: "HIMSI!",
   },
 ];
 

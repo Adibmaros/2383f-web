@@ -56,16 +56,16 @@ const ProjectShowcase = () => {
       {/* Filter Section */}
       <section className="py-8 px-4">
         <div className="max-w-7xl mx-auto flex flex-wrap gap-3 justify-center">
-          <Badge variant="secondary" className="px-4 py-2 text-sm cursor-pointer hover:bg-primary hover:text-white transition-colors">
+          <Badge variant="secondary" className="px-4 py-2 text-sm cursor-pointer hover:bg-gray-400 hover:text-white transition-colors">
             All Projects
           </Badge>
-          <Badge variant="secondary" className="px-4 py-2 text-sm cursor-pointer hover:bg-primary hover:text-white transition-colors">
+          <Badge variant="secondary" className="px-4 py-2 text-sm cursor-pointer hover:bg-gray-400 hover:text-white transition-colors">
             Web Applications
           </Badge>
-          <Badge variant="secondary" className="px-4 py-2 text-sm cursor-pointer hover:bg-primary hover:text-white transition-colors">
+          <Badge variant="secondary" className="px-4 py-2 text-sm cursor-pointer hover:bg-gray-400 hover:text-white transition-colors">
             Mobile Apps
           </Badge>
-          <Badge variant="secondary" className="px-4 py-2 text-sm cursor-pointer hover:bg-primary hover:text-white transition-colors">
+          <Badge variant="secondary" className="px-4 py-2 text-sm cursor-pointer hover:bg-gray-400 hover:text-white transition-colors">
             Financial Systems
           </Badge>
         </div>
