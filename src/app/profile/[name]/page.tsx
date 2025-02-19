@@ -5,11 +5,9 @@ import { members } from "@/lib/data";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Link from "next/link";
 
-interface PageProps {
-  params: { name: string };
-}
+// Fix the PageProps interface to match Next.js types
 
-const ProfileDetailPage = ({ params }: PageProps) => {
+const ProfileDetailPage = ({ params, searchParams }: any) => {
   const { name } = params;
   const member = members.find((m) => m.name.toLowerCase().replace(/\s+/g, "-") === name);
 
