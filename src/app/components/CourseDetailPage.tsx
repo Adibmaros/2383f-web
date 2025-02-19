@@ -97,6 +97,10 @@ const CourseDetailPage: React.FC<CourseDetailProps> = ({ course }) => {
                     <Clock className="w-5 h-5 mr-2" />
                     <span>{course.schedule.time}</span>
                   </div>
+                  <div className="flex items-center text-gray-600">
+                    <MapPin className="w-5 h-5 mr-2" />
+                    <span>Ruang: {course.schedule.room}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -135,6 +139,7 @@ const CourseDetailPage: React.FC<CourseDetailProps> = ({ course }) => {
                                   <div className="flex items-center">
                                     <FileText className="w-5 h-5 mr-2 text-blue-600" />
                                     <span>{material.name}</span>
+                                    {meeting.materials.length < 2 ? "Belum ada Dokumen" : null}
                                   </div>
                                   <Button size="sm" variant="outline" onClick={() => handleDownload(material.url, `${material.name}.${material.type}`)}>
                                     <Download className="w-4 h-4 mr-1" />
@@ -159,9 +164,10 @@ const CourseDetailPage: React.FC<CourseDetailProps> = ({ course }) => {
                 <div className="space-y-6">
                   <div className="flex flex-col space-y-2">
                     <h3 className="text-xl font-semibold">
-                      {course.lecturer.title} {course.lecturer.name}
+                      {course.lecturer.name}
+                      {course.lecturer.title}
                     </h3>
-                    <p className="text-gray-600">{course.lecturer.email}</p>
+                    {/* <p className="text-gray-600">{course.lecturer.email}</p> */}
                   </div>
 
                   <div>
@@ -173,11 +179,6 @@ const CourseDetailPage: React.FC<CourseDetailProps> = ({ course }) => {
                         </span>
                       ))}
                     </div>
-                  </div>
-
-                  <div className="flex items-center text-gray-600">
-                    <MapPin className="w-5 h-5 mr-2" />
-                    <span>Ruang: {course.schedule.room}</span>
                   </div>
                 </div>
               </CardContent>

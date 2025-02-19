@@ -15,7 +15,7 @@ interface MemberProfile {
 export const members: MemberProfile[] = [
   {
     name: "Fitriani",
-    role: "Anggota",
+    role: "Calon Pengusaha Tambang",
     bio: "Menonton & Membaca. Ingin menjadi pengusaha tambang.",
     imageUrl: "/members/fitriani.jpg",
     hobbies: "Menonton & Membaca",
@@ -27,7 +27,7 @@ export const members: MemberProfile[] = [
   },
   {
     name: "Meylinda Pratiwi",
-    role: "Anggota",
+    role: "Calon Orang Sukses",
     bio: "Menonton drakor/dracin. Bercita-cita menjadi orang sukses.",
     imageUrl: "/members/meylinda.jpeg",
     hobbies: "Menonton drakor/dracin",
@@ -39,7 +39,7 @@ export const members: MemberProfile[] = [
   },
   {
     name: "Muhammad Raja",
-    role: "Anggota",
+    role: "Calon Programmer",
     bio: "Travelling. Ingin menjadi programmer.",
     imageUrl: "members/raja.jpg",
     hobbies: "Travelling",
@@ -51,7 +51,7 @@ export const members: MemberProfile[] = [
   },
   {
     name: "Eriel Budiman",
-    role: "Anggota",
+    role: "Calon Orang Sukses",
     bio: "Sering ke Kos Nicco. Ingin sukses.",
     imageUrl: "/members/eriel.jpg",
     hobbies: "Ke Kos Nicco",
@@ -63,7 +63,7 @@ export const members: MemberProfile[] = [
   },
   {
     name: "Mitra Asindu",
-    role: "Anggota",
+    role: "Calon Lulusan Terbaik",
     bio: "Mendengar musik di Spotify. Target: Lulus Sarjana tepat waktu.",
     imageUrl: "/members/mitra.jpg",
     hobbies: "Mendengar musik di Spotify",
@@ -72,5 +72,17 @@ export const members: MemberProfile[] = [
     favoriteFood: "Bread and Avocado Juice",
     classMessage: "Ya tetap kompak, mendukung satu sama lain meskipun nanti semester 5 ada yang lanjut di PSI, DTA, & SIA",
     classGoals: "Lulus Sarjana bareng-bareng satu kelas",
+  },
+  {
+    name: "Adib Muhammad Maros",
+    role: "Calon Software Engineer",
+    bio: "hidup sekali, hidup yang berarti!",
+    imageUrl: "/members/adib.jpeg",
+    hobbies: "Baca Buku, Ngoding, Nulis, Coba hal baru",
+    dreams: "Software Engineer!",
+    motto: "Cintailah takdirmu!",
+    favoriteFood: "Ayam Goreng, pecel lele",
+    classMessage: "semoga bisa menciptakan kenangan indah yang bisa dikenang di masa depan nantinya",
+    classGoals: "Sukses bareng bareng satu kelas",
   },
 ];
