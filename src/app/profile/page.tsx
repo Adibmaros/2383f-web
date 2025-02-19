@@ -1,20 +1,9 @@
 // ProfilePage.tsx
 "use client";
+import Link from "next/link";
 import React from "react";
 
-interface MemberProfile {
-  name: string;
-  role: string;
-  bio: string;
-  imageUrl: string;
-}
-
-const members: MemberProfile[] = [
-  { name: "Ahmad", role: "Ketua Kelas", bio: "Berkomitmen membangun solidaritas dan memajukan kelas.", imageUrl: "/ahmad.jpg" },
-  { name: "Siti", role: "Wakil Ketua", bio: "Mendukung kerja sama tim dan komunikasi yang efektif.", imageUrl: "/siti.jpg" },
-  { name: "Budi", role: "Sekretaris", bio: "Mengelola dokumentasi dan catatan penting kelas.", imageUrl: "/budi.jpg" },
-  { name: "Ani", role: "Bendahara", bio: "Mengelola keuangan kelas dengan transparansi.", imageUrl: "/ani.jpg" },
-];
+import { members } from "@/lib/data";
 
 const ProfilePage: React.FC = () => {
   return (
@@ -27,7 +16,9 @@ const ProfilePage: React.FC = () => {
             <img src={member.imageUrl} alt={member.name} className="w-24 h-24 mx-auto rounded-full object-cover mb-4" />
             <h3 className="text-xl font-semibold text-indigo-500">{member.name}</h3>
             <p className="text-gray-600 text-sm font-medium">{member.role}</p>
-            <p className="text-gray-500 text-xs mt-2">{member.bio}</p>
+            <Link className="inline-block mt-2 text-sm text-blue-500 hover:underline" href={`/profile/${member.name.toLowerCase().replace(/\s+/g, "-")}`}>
+              Lihat detail
+            </Link>
           </div>
         ))}
       </div>
