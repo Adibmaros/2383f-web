@@ -56,31 +56,34 @@ const courses = [
 
 const CourseListingPage = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50/50 via-white to-purple-50/50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 py-12 px-4 sm:px-6 lg:px-8">
+      {/* Subtle Pattern Overlay */}
+      <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] dark:bg-[radial-gradient(#1f2937_1px,transparent_1px)] opacity-50"></div>
+
+      <div className="relative max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Daftar Mata Kuliah</h1>
-          <p className="text-lg text-gray-600">Program Studi Sistem Informasi</p>
+          <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 mb-4">Daftar Mata Kuliah</h1>
+          <p className="text-lg text-gray-600 dark:text-gray-300">Program Studi Sistem Informasi</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {courses.map((course) => (
             <Link href={`/matkul/${course.id}`} key={course.id} className="transform transition-all duration-300 hover:scale-105">
-              <Card className="h-full hover:shadow-lg transition-shadow duration-300 bg-white">
+              <Card className="h-full group hover:shadow-lg dark:hover:shadow-blue-500/10 transition-all duration-300 bg-white/70 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50">
                 <CardHeader>
-                  <CardTitle className="text-xl font-semibold text-gray-800">{course.name}</CardTitle>
+                  <CardTitle className="text-xl font-semibold text-gray-800 dark:text-gray-100">{course.name}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600 mb-4">{course.description}</p>
-                  <div className="flex items-center text-gray-700">
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">{course.description}</p>
+                  <div className="flex items-center text-gray-700 dark:text-gray-300">
                     <User className="w-5 h-5 mr-2" />
                     <span className="text-sm">{course.lecturer}</span>
                   </div>
                 </CardContent>
-                <CardFooter className="flex justify-end text-blue-600">
-                  <div className="flex items-center text-sm">
+                <CardFooter className="flex justify-end">
+                  <div className="flex items-center text-sm text-blue-600 dark:text-blue-400 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors">
                     Lihat Detail
-                    <ChevronRight className="w-4 h-4 ml-1" />
+                    <ChevronRight className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" />
                   </div>
                 </CardFooter>
               </Card>

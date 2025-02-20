@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -79,7 +81,7 @@ const ImageCarousel: React.FC<CarouselProps> = ({ images = defaultImages, autoPl
   return (
     <div className="relative w-full md:max-w-4xl max-w-sm mx-auto" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
       {/* Main Image Container */}
-      <div className="relative h-96 overflow-hidden rounded-xl">
+      <div className="relative h-96 overflow-hidden rounded-xl shadow-lg dark:shadow-gray-800">
         {images.map((image, index) => (
           <div
             key={index}
@@ -99,12 +101,20 @@ const ImageCarousel: React.FC<CarouselProps> = ({ images = defaultImages, autoPl
       </div>
 
       {/* Navigation Buttons */}
-      <button onClick={goToPrevious} className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 hover:bg-white shadow-lg transition-all duration-200 hover:scale-110" aria-label="Previous slide">
-        <ChevronLeft className="h-6 w-6 text-gray-800" />
+      <button
+        onClick={goToPrevious}
+        className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-800 shadow-lg dark:shadow-gray-900/30 transition-all duration-200 hover:scale-110"
+        aria-label="Previous slide"
+      >
+        <ChevronLeft className="h-6 w-6 text-gray-800 dark:text-gray-200" />
       </button>
 
-      <button onClick={goToNext} className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 hover:bg-white shadow-lg transition-all duration-200 hover:scale-110" aria-label="Next slide">
-        <ChevronRight className="h-6 w-6 text-gray-800" />
+      <button
+        onClick={goToNext}
+        className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-800 shadow-lg dark:shadow-gray-900/30 transition-all duration-200 hover:scale-110"
+        aria-label="Next slide"
+      >
+        <ChevronRight className="h-6 w-6 text-gray-800 dark:text-gray-200" />
       </button>
 
       {/* Indicators */}
@@ -113,7 +123,7 @@ const ImageCarousel: React.FC<CarouselProps> = ({ images = defaultImages, autoPl
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-2.5 h-2.5 rounded-full transition-all duration-200 ${index === currentIndex ? "bg-white w-8" : "bg-white/60 hover:bg-white/80"}`}
+            className={`w-2.5 h-2.5 rounded-full transition-all duration-200 ${index === currentIndex ? "bg-white dark:bg-gray-200 w-8" : "bg-white/60 dark:bg-gray-400/60 hover:bg-white/80 dark:hover:bg-gray-300/80"}`}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
