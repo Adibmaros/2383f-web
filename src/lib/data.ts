@@ -217,4 +217,16 @@ export const members: MemberProfile[] = [
     classMessage: "Tetep semangat, jangan menyerah nanti tuhan kasih yg mantap2",
     classGoals: "Emm gatau hhe",
   },
+  {
+    name: "Fauzan Aziman Putra",
+    role: "Programmer, pengusaha",
+    bio: "Kebaikan adalah investasi terbaik",
+    imageUrl: "/members/aziman.jpg",
+    hobbies: "Bola, game",
+    dreams: "Sukses di usia muda, bisa open lowongan kerja",
+    motto: "Kebaikan adalah investasi terbaik",
+    favoriteFood: "Nasi goreng",
+    classMessage: "Lulus bareng",
+    classGoals: "Lulus bareng",
+  },
 ];

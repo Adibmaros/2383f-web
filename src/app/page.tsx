@@ -14,7 +14,6 @@ const Page = () => {
 
   return (
     <div className="min-h-screen">
-      <Navbar />
       <div>
         <Hero />
         <ImageCarousel />
