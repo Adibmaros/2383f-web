@@ -1,37 +1,17 @@
 "use client";
 
-import * as React from "react";
-import Footer from "./components/Footer";
-import Hero from "./components/Hero";
-import ImageCarousel from "./components/ImageCarousel";
-import Navbar from "./components/Navbar";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { useModal } from "@/components/ModalContext";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
-const Page = () => {
-  const { isModalOpen, closeModal } = useModal();
+export default function Page() {
+  const router = useRouter();
 
-  return (
-    <div className="min-h-screen">
-      <div>
-        <Hero />
-        <ImageCarousel />
-        <Footer />
-      </div>
+  useEffect(() => {
+    // Redirect langsung ke /dashboard tanpa kondisi
+    router.push("/dashboard");
+  }, [router]);
 
-      {/* Modal Pemberitahuan */}
-      <Dialog open={isModalOpen} onOpenChange={closeModal}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Info Terbaru!</DialogTitle>
-            <DialogDescription>🚀 Kami baru saja memperbarui fitur di website ini! Jangan lupa cek halaman utama untuk melihat yang baru.</DialogDescription>
-          </DialogHeader>
-          <Button onClick={closeModal}>Tutup</Button>
-        </DialogContent>
-      </Dialog>
-    </div>
-  );
-};
-
-export default Page;
+  // Halaman kosong (tidak menampilkan apa-apa)
+  // atau bisa juga menampilkan loading jika ingin
+  return null;
+}
