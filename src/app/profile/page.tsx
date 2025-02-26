@@ -72,7 +72,7 @@ const ProfilePage: React.FC = () => {
                   <img
                     src={member.imageUrl}
                     alt={member.name}
-                    className="relative w-32 h-32 mx-auto rounded-full object-cover 
+                    className="relative w-32 h-32 mx-auto rounded-full
                       ring-4 ring-white dark:ring-slate-800 group-hover:ring-indigo-100 
                       dark:group-hover:ring-indigo-900 transition-all duration-300"
                   />
