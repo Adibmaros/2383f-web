@@ -195,11 +195,11 @@ export const members: MemberProfile[] = [
   },
   {
     name: "Aishwarya Rai",
-    role: "Penari",
+    role: "WFH",
     bio: "Menari dengan semangat",
     imageUrl: "/members/aish.jpg",
     hobbies: "Menari",
-    dreams: "WFH Life goes on",
+    dreams: "WFH",
     motto: "Life goes on",
     favoriteFood: "Makanan pedas, ice cream, coklat, dan matchaa",
     classMessage: "Sukses bareng dunia akhirat ya mantemann❤",
