@@ -69,7 +69,7 @@ const academicData: SectionData[] = [
     title: "Syarat Seminar Proposal",
     iconName: "FileText",
     iconColor: "text-blue-600 dark:text-blue-400",
-    content: [{ text: "Telah menyelesaikan minimal 100 SKS" }, { text: "IPK minimal 2.75" }, { text: "Unduh Formulir Pendaftaran", link: "https://example.com/form" }, { text: "Panduan Lengkap Seminar", link: "https://example.com/guide" }],
+    content: [{ text: "Telah menyelesaikan minimal 100 SKS" }, { text: "IPK minimal 2.5" }, { text: "Lulus MK metodologi penelitian ( min. nilai C )" }, { text: "Sudah memiliki judul atau tema penelitian" }],
   },
   {
     title: "Mencari Judul Skripsi",

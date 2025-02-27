@@ -1,124 +1,101 @@
+// LoginForm.tsx
 "use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAtom } from "jotai";
-import { authAtom } from "@/lib/atoms/authAtom";
+import { authAtom, saveAuth } from "@/lib/atoms/authAtom";
 import Link from "next/link";
-import { Button } from "./ui/button";
 
 export default function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
   const [, setAuth] = useAtom(authAtom);
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
     setError("");
 
-    try {
-      const response = await fetch("/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      });
+    // Validasi sederhana
+    if (!username || !password) {
+      setError("Username dan password harus diisi");
+      return;
+    }
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Login gagal");
-      }
-
-      setAuth({
-        username,
+    // Simulasi cek login (ganti dengan API call asli)
+    // Di dunia nyata, lakukan validasi di server
+    if (password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD) {
+      // contoh sederhana
+      const user = {
+        username: username,
         isAuthenticated: true,
-      });
+      };
 
-      router.push("/dashboard");
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Terjadi kesalahan");
-    } finally {
-      setLoading(false);
+      // Update state
+      setAuth(user);
+
+      // Simpan ke localStorage dan cookie
+      saveAuth(user);
+
+      // Redirect dengan replace untuk menghindari history back
+      router.replace("/dashboard");
+    } else {
+      setError("Username atau password salah");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 relative">
+    <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+      {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">{error}</div>}
+
       <div>
-        <label htmlFor="username" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+        <label htmlFor="username" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
           Username
         </label>
         <input
           id="username"
+          name="username"
           type="text"
+          required
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 
+                    rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 
+                    focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          required
-          className="mt-1 block w-full rounded-lg border border-gray-300 dark:border-gray-600 
-          bg-white dark:bg-gray-800 px-4 py-2.5
-          text-gray-900 dark:text-white
-          focus:border-blue-500 dark:focus:border-blue-400 
-          focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-400/20
-          transition duration-200"
         />
       </div>
 
       <div>
-        <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+        <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
           Password
         </label>
         <input
           id="password"
+          name="password"
           type="password"
+          required
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 
+                    rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 
+                    focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          required
-          className="mt-1 block w-full rounded-lg border border-gray-300 dark:border-gray-600 
-          bg-white dark:bg-gray-800 px-4 py-2.5
-          text-gray-900 dark:text-white
-          focus:border-blue-500 dark:focus:border-blue-400 
-          focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-400/20
-          transition duration-200"
         />
       </div>
 
-      {error && (
-        <div className="rounded-lg bg-red-50 dark:bg-red-900/30 p-3">
-          <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
-        </div>
-      )}
-
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full flex justify-center py-2.5 px-4 
-        rounded-lg text-sm font-medium text-white
-        bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600
-        focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
-        dark:focus:ring-offset-gray-800 dark:focus:ring-blue-400
-        disabled:opacity-50 disabled:cursor-not-allowed
-        transition duration-200"
-      >
-        {loading ? (
-          <span className="inline-flex items-center">
-            <svg className="animate-spin -ml-1 mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-            </svg>
-            Loading...
-          </span>
-        ) : (
-          "Login"
-        )}
-      </button>
-      <div className="float-right text-sm text-gray-500 hover:text-blue-500 dark:text-gray-400">
-        <Link href={"/tamu"}>Login sebagai tamu</Link>
+      <div>
+        <button
+          type="submit"
+          className="group relative w-full flex justify-center py-2 px-4 border border-transparent 
+                    text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 
+                    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          Sign in
+        </button>
+      </div>
+      <div className="float-end text-sm text-gray-500 hover:text-blue-500">
+        <Link href="/tamu">Masuk sebagai tamu</Link>
       </div>
     </form>
   );

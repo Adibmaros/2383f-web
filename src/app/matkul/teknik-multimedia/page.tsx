@@ -1,42 +1,26 @@
 import CourseDetailPage from "@/app/components/CourseDetailPage";
 
 const courseData = {
-  id: "teknik-multimedia",
   name: "Teknik Multimedia",
-  code: "SIN4412",
-  description: "Mata kuliah yang membahas konsep dan teknik pengembangan konten multimedia, termasuk pengolahan gambar, audio, video, dan animasi.",
-  lecturer: {
-    name: "M. Syendi Apriko",
-    title: ", S.Pd., M.Kom.",
-    image: "/lecture/dosen6.png",
-    email: "syendi.apriko@university.ac.id",
-    expertise: ["Multimedia"],
-  },
-  schedule: {
-    day: "Kamis",
-    time: "14:41 - 16:20",
-    room: "E408",
-  },
-  credit: 2,
-  semester: "20242",
+  code: "SIN4114",
   meetings: [
-    // {
-    //   week: 1,
-    //   topic: "Pengantar Teknik Multimedia",
-    //   description: "Pengenalan konsep dasar multimedia dan elemen-elemen multimedia",
-    //   materials: [
-    //     {
-    //       name: "Slide Multimedia",
-    //       type: "pdf",
-    //       url: "/materials/multimedia/week1/slides.pdf",
-    //     },
-    //     {
-    //       name: "Praktikum 1",
-    //       type: "doc",
-    //       url: "/materials/multimedia/week1/praktikum.doc",
-    //     },
-    //   ],
-    // },
+    {
+      week: 1,
+      topic: "Pengantar Teknik Multimedia",
+      materials: [
+        {
+          name: "Modul Pengantar",
+          type: "pdf",
+          url: "/materials/aps/week1/modul.pdf",
+        },
+        {
+          name: "Contoh Kasus",
+          type: "doc",
+          url: "/materials/aps/week1/case.doc",
+        },
+      ],
+    },
+    // Add more meetings as needed
   ],
 };
 

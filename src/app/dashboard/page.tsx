@@ -1,8 +1,9 @@
+// DashboardPage.tsx
 "use client";
 
 import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
-import { authAtom } from "@/lib/atoms/authAtom";
+import { authAtom, saveAuth } from "@/lib/atoms/authAtom";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import Hero from "../components/Hero";
 import ImageCarousel from "../components/ImageCarousel";
@@ -13,23 +14,27 @@ export default function DashboardPage() {
   const router = useRouter();
 
   const handleLogout = () => {
-    // Hapus data dari localStorage
+    // Set state ke null
     setAuth(null);
-    // Redirect ke login
-    router.push("/login");
+
+    // Hapus dari localStorage dan cookie
+    saveAuth(null);
+
+    // Force redirect ke login
+    // Gunakan replace untuk menghindari kembali ke halaman ini
+    router.replace("/login");
   };
 
   return (
     <ProtectedRoute>
       <div className="min-h-screen">
-        {/* Hapus tombol logout dari sini karena sudah dipindahkan ke Hero */}
         <Hero
           title="Sistem Informasi F"
           subtitle="Persahabatan adalah ikatan tanpa syarat, di mana jiwa saling menemukan cerminan, dan kehadiran menjadi pelipur tanpa perlu kata-kata.🌿✨"
           secondaryButtonText="Logout"
           onPrimaryClick={() => {}}
-          onSecondaryClick={handleLogout} // Teruskan handleLogout ke Hero sebagai onSecondaryClick
-          username={auth?.username} // Meneruskan username ke Hero
+          onSecondaryClick={handleLogout}
+          username={auth?.username}
         />
         <ImageCarousel />
         <Footer />

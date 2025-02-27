@@ -1,27 +1,43 @@
+// middleware.ts
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
-  // Mengambil nilai dari cookie auth (opsional, untuk keamanan tambahan)
-  const auth = request.cookies.get("auth_user")?.value;
-  const isAuthenticated = auth ? JSON.parse(auth)?.isAuthenticated : false;
+  // Mengambil nilai dari cookie auth
+  const authCookie = request.cookies.get("auth_user")?.value;
 
-  const isLoginPage = request.nextUrl.pathname === "/login";
+  // Parse cookie untuk memeriksa status autentikasi
+  let isAuthenticated = false;
 
-  // Jika user tidak authenticated dan mencoba akses halaman selain login
-  if (!isAuthenticated && !isLoginPage && request.nextUrl.pathname.startsWith("/dashboard")) {
-    return NextResponse.redirect(new URL("/login", request.url));
+  try {
+    if (authCookie) {
+      const authData = JSON.parse(decodeURIComponent(authCookie));
+      isAuthenticated = authData?.isAuthenticated === true;
+    }
+  } catch (error) {
+    console.error("Error parsing auth cookie:", error);
+    isAuthenticated = false;
   }
 
-  // Jika user sudah authenticated dan mencoba akses halaman login
+  const isLoginPage = request.nextUrl.pathname === "/login";
+  const isDashboardPage = request.nextUrl.pathname.startsWith("/dashboard");
+
+  // Jika user tidak authenticated dan mencoba akses dashboard
+  if (!isAuthenticated && isDashboardPage) {
+    const loginUrl = new URL("/login", request.url);
+    return NextResponse.redirect(loginUrl);
+  }
+
+  // Jika user sudah authenticated dan mencoba akses login
   if (isAuthenticated && isLoginPage) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
+    const dashboardUrl = new URL("/dashboard", request.url);
+    return NextResponse.redirect(dashboardUrl);
   }
 
   return NextResponse.next();
 }
 
-// Konfigurasi halaman mana yang terkena middleware
+// Konfigurasi halaman yang terkena middleware
 export const config = {
   matcher: ["/dashboard/:path*", "/login"],
 };

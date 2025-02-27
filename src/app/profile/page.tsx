@@ -47,6 +47,13 @@ const ProfilePage: React.FC = () => {
         dark:from-slate-900 dark:via-slate-800 dark:to-zinc-900 
         text-gray-800 dark:text-gray-100 py-16 px-6"
     >
+      <Link
+        href="/"
+        className="inline-block mb-8 mx-auto max-w-3xl w-full px-6 text-indigo-600 dark:text-indigo-400 
+          hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors"
+      >
+        ← Kembali ke Home
+      </Link>
       <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-7xl mx-auto">
         <h1 className="text-5xl font-bold text-center text-indigo-600 dark:text-indigo-400 mb-4">Profil Anggota Kelas 2383F</h1>
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="text-lg text-center mb-12 max-w-3xl mx-auto text-gray-600 dark:text-gray-300">
@@ -66,15 +73,15 @@ const ProfilePage: React.FC = () => {
               <div className="relative mb-6">
                 <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.2 }} className="relative group">
                   <div
-                    className="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 
-                    rounded-full opacity-75 group-hover:opacity-100 blur transition duration-300"
+                    className="absolute -inset-0.5 bg-gradient-to-r from-[#395A8C] to-[#2A4374] 
+      rounded-full opacity-75 group-hover:opacity-100 blur transition duration-300"
                   ></div>
                   <img
                     src={member.imageUrl}
                     alt={member.name}
                     className="relative w-32 h-32 mx-auto rounded-full
-                      ring-4 ring-white dark:ring-slate-800 group-hover:ring-indigo-100 
-                      dark:group-hover:ring-indigo-900 transition-all duration-300"
+        ring-4 ring-white dark:ring-slate-800 group-hover:ring-[#395A8C]/30
+        dark:group-hover:ring-[#395A8C]/50 transition-all duration-300"
                   />
                 </motion.div>
               </div>

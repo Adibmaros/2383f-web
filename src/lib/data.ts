@@ -51,7 +51,7 @@ export const members: MemberProfile[] = [
   },
   {
     name: "Muhammad Fattan Attaur Rahman",
-    role: "Game Developer",
+    role: "Calon Game Developer",
     bio: "Ngegame. Bercita-cita menjadi game developer.",
     imageUrl: "/members/fatan.jpg",
     hobbies: "Ngegame",
