@@ -1,4 +1,3 @@
-// LoginForm.tsx
 "use client";
 
 import { useState } from "react";
@@ -14,42 +13,42 @@ export default function LoginForm() {
   const [, setAuth] = useAtom(authAtom);
   const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-
-    // Validasi sederhana
     if (!username || !password) {
       setError("Username dan password harus diisi");
       return;
     }
-
-    // Simulasi cek login (ganti dengan API call asli)
-    // Di dunia nyata, lakukan validasi di server
-    if (password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD) {
-      // contoh sederhana
-      const user = {
-        username: username,
-        isAuthenticated: true,
-      };
-
-      // Update state
-      setAuth(user);
-
-      // Simpan ke localStorage dan cookie
-      saveAuth(user);
-
-      // Redirect dengan replace untuk menghindari history back
-      router.replace("/dashboard");
-    } else {
-      setError("Username atau password salah");
+    try {
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+      const data = await response.json();
+      if (response.ok && data.success) {
+        const user = {
+          username,
+          isAuthenticated: true,
+        };
+        // Update state global authAtom
+        setAuth(user);
+        // Simpan ke localStorage
+        saveAuth(user);
+        // Redirect ke dashboard
+        router.replace("/dashboard");
+      } else {
+        setError(data.message || "Login gagal");
+      }
+    } catch (error) {
+      setError("Terjadi kesalahan, coba lagi nanti");
     }
   };
 
   return (
     <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
       {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">{error}</div>}
-
       <div>
         <label htmlFor="username" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
           Username
@@ -66,7 +65,6 @@ export default function LoginForm() {
           onChange={(e) => setUsername(e.target.value)}
         />
       </div>
-
       <div>
         <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
           Password
@@ -83,7 +81,6 @@ export default function LoginForm() {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-
       <div>
         <button
           type="submit"
