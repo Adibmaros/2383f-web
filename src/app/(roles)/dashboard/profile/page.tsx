@@ -47,13 +47,6 @@ const ProfilePage: React.FC = () => {
         dark:from-slate-900 dark:via-slate-800 dark:to-zinc-900 
         text-gray-800 dark:text-gray-100 py-16 px-6"
     >
-      <Link
-        href="/"
-        className="inline-block mb-8 mx-auto max-w-3xl w-full px-6 text-indigo-600 dark:text-indigo-400 
-          hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors"
-      >
-        ← Kembali ke Home
-      </Link>
       <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-7xl mx-auto">
         <h1 className="text-5xl font-bold text-center text-indigo-600 dark:text-indigo-400 mb-4">Profil Anggota Kelas 2383F</h1>
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="text-lg text-center mb-12 max-w-3xl mx-auto text-gray-600 dark:text-gray-300">

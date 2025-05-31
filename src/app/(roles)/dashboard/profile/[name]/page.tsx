@@ -5,9 +5,11 @@ import { notFound } from "next/navigation";
 import { members } from "@/lib/data";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Link from "next/link";
+import React from "react";
 
 const ProfileDetailPage = ({ params }: any) => {
-  const { name } = params;
+  const unwrapperParams: any = React.use(params);
+  const { name } = unwrapperParams;
   const member = members.find((m) => m.name.toLowerCase().replace(/\s+/g, "-") === name);
 
   if (!member) {
@@ -55,14 +57,6 @@ const ProfileDetailPage = ({ params }: any) => {
       className="min-h-screen py-16 px-4 bg-gradient-to-b from-slate-50 via-gray-50 to-zinc-100 
         dark:from-slate-900 dark:via-slate-800 dark:to-zinc-900"
     >
-      <Link
-        href="/profile"
-        className="inline-block mb-8 mx-auto max-w-3xl w-full px-6 text-indigo-600 dark:text-indigo-400 
-          hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors"
-      >
-        ← Kembali ke daftar anggota
-      </Link>
-
       <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6 }}>
         <Card
           className="max-w-3xl mx-auto backdrop-blur-xl bg-white/80 dark:bg-slate-800/50 

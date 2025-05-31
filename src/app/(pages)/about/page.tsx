@@ -5,7 +5,7 @@ import React from "react";
 const AboutPage: React.FC = () => {
   return (
     <div
-      className="min-h-screen bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-100 
+      className="min-h-screen mt-5 bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-100 
       dark:from-slate-900 dark:via-slate-800 dark:to-zinc-900 
       text-gray-800 dark:text-gray-200"
     >
