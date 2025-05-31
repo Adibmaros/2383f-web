@@ -221,7 +221,7 @@ const Hero: React.FC<HeroProps> = ({
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.4, duration: 0.8 }} className="relative w-full mx-auto mb-8 sm:mb-12 group">
               <div className="relative aspect-video max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-4xl mx-auto rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl dark:shadow-gray-900/50 ring-1 ring-gray-200/50 dark:ring-gray-700/50">
                 <Image
-                  src="/hero2.jpg"
+                  src="/hero.jpeg"
                   alt="Hero image showcasing Sistem Informasi F community"
                   fill
                   priority

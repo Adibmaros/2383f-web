@@ -29,8 +29,7 @@ const defaultSections: FooterSection[] = [
     title: "Resources",
     links: [
       { label: "Google Drive", href: "https://drive.google.com/drive/folders/1UhHMdUBfGVrofgoA9l1Q42uG7dglZ7lq?usp=drive_link" },
-      { label: "Members Profile", href: "/profile" },
-      { label: "Mata Kuliah", href: "/matkul" },
+      { label: "Members Profile", href: "/dashboard/profile" },
     ],
   },
 ];

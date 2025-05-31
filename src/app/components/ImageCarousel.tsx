@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { ChevronLeft, ChevronRight, Pause, Play, Maximize2 } from "lucide-react";
 
 interface CarouselProps {
@@ -143,7 +144,18 @@ const ImageCarousel: React.FC<CarouselProps> = ({ images = defaultImages, autoPl
                 transform: `translateX(${(index - currentIndex) * 100}%)`,
               }}
             >
-              <img src={image.url} alt={image.alt} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" loading={index === 0 ? "eager" : "lazy"} />
+              {/* Optimized Next.js Image component */}
+              <Image
+                src={image.url}
+                alt={image.alt}
+                fill
+                className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                priority={index === 0} // Priority untuk gambar pertama
+                quality={85} // Kualitas optimal
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 80vw"
+                placeholder="blur" // Smooth loading
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+              />
 
               {/* Enhanced Image Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -223,7 +235,15 @@ const ImageCarousel: React.FC<CarouselProps> = ({ images = defaultImages, autoPl
               index === currentIndex ? "ring-2 ring-blue-500 scale-110" : "opacity-60 hover:opacity-100 hover:scale-105"
             }`}
           >
-            <img src={image.url} alt={`Thumbnail ${index + 1}`} className="w-full h-full object-cover" />
+            {/* Optimized thumbnail images */}
+            <Image
+              src={image.url}
+              alt={`Thumbnail ${index + 1}`}
+              fill
+              className="object-cover"
+              sizes="80px"
+              quality={60} // Lower quality untuk thumbnail
+            />
             {index === currentIndex && <div className="absolute inset-0 bg-blue-500/20" />}
           </button>
         ))}
