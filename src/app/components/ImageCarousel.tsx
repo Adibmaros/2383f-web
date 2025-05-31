@@ -52,6 +52,30 @@ const defaultImages = [
     title: "HIMSI!",
     description: "Kegiatan bersama Himpunan Mahasiswa Sistem Informasi",
   },
+  {
+    url: "/photos/bukber.jpeg",
+    alt: "Slide 7",
+    title: "Bukber Kampoeng Kecil",
+    description: "Bukber VVIP di Kampoeng Kecil KM 5",
+  },
+  {
+    url: "/photos/jb1.jpeg",
+    alt: "Slide 8",
+    title: "Estafet Sedotan",
+    description: "Acara akhir semester 4 di JB",
+  },
+  {
+    url: "/photos/jb2.jpeg",
+    alt: "Slide 9",
+    title: "-",
+    description: "Acara akhir semester 4 di JB",
+  },
+  {
+    url: "/photos/jb3.jpeg",
+    alt: "Slide 10",
+    title: "-",
+    description: "Acara akhir semester 4 di JB",
+  },
 ];
 
 const ImageCarousel: React.FC<CarouselProps> = ({ images = defaultImages, autoPlay = true, interval = 5000 }) => {
