@@ -1,42 +1,66 @@
 // ProtectedRoute.tsx
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAtom, useAtomValue } from "jotai";
-import { authAtom, isAuthenticatedAtom, initializeAuth, saveAuth } from "@/lib/atoms/authAtom";
+import { authAtom, isAuthenticatedAtom, initializeAuth } from "@/lib/atoms/authAtom";
 
-export default function ProtectedRoute({ children }: { children: React.ReactNode }) {
+interface ProtectedRouteProps {
+  children: React.ReactNode;
+  requireAuth?: boolean; // Optional: default true
+  redirectTo?: string; // Optional: default "/login"
+}
+
+export default function ProtectedRoute({ children, requireAuth = true, redirectTo = "/login" }: ProtectedRouteProps) {
   const router = useRouter();
   const [auth, setAuth] = useAtom(authAtom);
   const isAuthenticated = useAtomValue(isAuthenticatedAtom);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Inisialisasi auth saat komponen mount
   useEffect(() => {
-    const initialAuth = initializeAuth();
-    setAuth(initialAuth);
-    setIsLoading(false);
+    const initAuth = async () => {
+      try {
+        const initialAuth = initializeAuth();
+        setAuth(initialAuth);
+      } catch (error) {
+        console.error("Error initializing auth:", error);
+        setAuth(null);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    initAuth();
   }, [setAuth]);
 
-  // Cek autentikasi setelah inisialisasi
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      router.push("/login");
+    if (!isLoading && requireAuth && !isAuthenticated) {
+      router.push(redirectTo);
     }
-  }, [isLoading, isAuthenticated, router]);
+  }, [isLoading, requireAuth, isAuthenticated, router, redirectTo]);
 
-  // Tetap tampilkan loading selama proses cek
   if (isLoading) {
-    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-300">Memuat...</p>
+        </div>
+      </div>
+    );
   }
 
-  // Tetap tampilkan loading jika belum terautentikasi
-  // Ini mencegah flicker konten sebelum redirect
-  if (!isAuthenticated) {
-    return <div className="min-h-screen flex items-center justify-center">Redirecting...</div>;
+  if (requireAuth && !isAuthenticated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-300">Mengarahkan ke halaman login...</p>
+        </div>
+      </div>
+    );
   }
 
-  // Tampilkan konten hanya jika terautentikasi
   return <>{children}</>;
 }

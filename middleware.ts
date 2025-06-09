@@ -1,4 +1,3 @@
-// middleware.ts
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
@@ -22,10 +21,6 @@ export function middleware(request: NextRequest) {
   const adminOnlyRoutes = ["/dashboard"];
   const isAdminOnlyRoute = adminOnlyRoutes.some((route) => pathname.startsWith(route));
 
-  // Public routes yang bisa diakses semua orang
-  const publicRoutes = ["/", "/tamu", "/about", "/memories", "/login"];
-  const isPublicRoute = publicRoutes.some((route) => pathname === route || pathname.startsWith(route));
-
   // Jika mengakses route admin tanpa autentikasi
   if (isAdminOnlyRoute && !isAuthenticated) {
     const loginUrl = new URL("/login", request.url);
@@ -48,8 +43,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    // Semua routes kecuali static files
-    "/((?!api|_next/static|_next/image|favicon.ico|.*\\.png$|.*\\.jpg$|.*\\.jpeg$|.*\\.svg$).*)",
-  ],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|.*\\.png$|.*\\.jpg$|.*\\.jpeg$|.*\\.svg$).*)"],
 };

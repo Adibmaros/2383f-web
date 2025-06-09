@@ -88,7 +88,7 @@ const ProfilePage: React.FC = () => {
       transition={{ duration: 0.6 }}
       className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50/30 to-purple-50/20 
         dark:from-slate-900 dark:via-indigo-950/50 dark:to-purple-950/20 
-        text-gray-800 dark:text-gray-100 py-6 sm:py-8 lg:py-12 px-3 sm:px-6 lg:px-8 mt-16"
+        text-gray-800 dark:text-gray-100 py-6 sm:py-8 lg:py-12 px-3 sm:px-6 lg:px-8"
     >
       <div className="max-w-7xl mx-auto">
         {/* Header Section - Kompak untuk mobile */}

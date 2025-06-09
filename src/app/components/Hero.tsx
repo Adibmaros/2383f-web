@@ -27,7 +27,7 @@ const Hero: React.FC<HeroProps> = ({
   username,
   userRole = "Anggota Kelas 2383F",
   loginButtonText = "Masuk sebagai Anggota Kelas",
-  loginHref = "/dashboard",
+  loginHref = "/login",
 }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -59,8 +59,15 @@ const Hero: React.FC<HeroProps> = ({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Tambahkan navigasi untuk fitur baru
+  const quickActions = [
+    { name: "Galeri Kenangan", href: "/memories", icon: "📸" },
+    { name: "Profil Anggota", href: "/dashboard/profile", icon: "👥", authRequired: true },
+    { name: "Tentang Kelas", href: "/about", icon: "ℹ️" },
+  ];
+
   return (
-    <div className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 pt-16 lg:pt-20">
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-slate-900 dark:to-gray-800">
       {/* Enhanced Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -inset-[10px] bg-gradient-to-r from-blue-100/20 to-purple-100/20 dark:from-blue-500/10 dark:to-purple-500/10 backdrop-blur-3xl" />
@@ -249,6 +256,26 @@ const Hero: React.FC<HeroProps> = ({
           </div>
         </motion.div>
       </div>
+
+      {/* Quick Actions */}
+      {username && (
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.8 }} className="mt-8 flex flex-wrap justify-center gap-4">
+          {quickActions.map((action, index) => {
+            if (action.authRequired && !username) return null;
+
+            return (
+              <Link
+                key={index}
+                href={action.href}
+                className="inline-flex items-center space-x-2 px-4 py-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl hover:bg-white dark:hover:bg-gray-800 transition-all duration-200 hover:scale-105 shadow-lg border border-white/50 dark:border-gray-700/50"
+              >
+                <span>{action.icon}</span>
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{action.name}</span>
+              </Link>
+            );
+          })}
+        </motion.div>
+      )}
 
       {/* Enhanced Decorative Bottom Gradient */}
       <div className="absolute bottom-0 left-0 right-0">

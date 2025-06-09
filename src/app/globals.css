@@ -78,3 +78,7 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
+
+.bg-gradient-radial {
+  background: radial-gradient(ellipse at center, var(--tw-gradient-stops));
+}

@@ -1,56 +1,47 @@
 // authAtom.ts
 import { atom } from "jotai";
 
-// Tipe data untuk user
-export interface User {
+export interface AuthUser {
   username: string;
   isAuthenticated: boolean;
+  role?: string;
 }
 
-// Atom dasar untuk autentikasi
-export const authAtom = atom<User | null>(null);
+// Main auth atom
+export const authAtom = atom<AuthUser | null>(null);
 
-// Atom turunan untuk status autentikasi
+// Derived atom untuk check authentication
 export const isAuthenticatedAtom = atom((get) => {
   const auth = get(authAtom);
-  return auth !== null && auth.isAuthenticated === true;
+  return auth?.isAuthenticated ?? false;
 });
 
-// Fungsi untuk inisialisasi auth dari localStorage/cookie
-export const initializeAuth = () => {
+// Helper functions
+export const saveAuth = (auth: AuthUser | null) => {
+  if (typeof window !== "undefined") {
+    if (auth) {
+      const authData = JSON.stringify(auth);
+      localStorage.setItem("auth_user", authData);
+      document.cookie = `auth_user=${encodeURIComponent(authData)}; path=/; max-age=86400`; // 24 hours
+    } else {
+      localStorage.removeItem("auth_user");
+      document.cookie = "auth_user=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+  }
+};
+
+export const initializeAuth = (): AuthUser | null => {
+  if (typeof window === "undefined") return null;
+
   try {
-    // Ambil dari localStorage
     const storedAuth = localStorage.getItem("auth_user");
     if (storedAuth) {
       return JSON.parse(storedAuth);
     }
-
-    // Atau coba dari cookie
-    const cookies = document.cookie.split("; ");
-    const authCookie = cookies.find((cookie) => cookie.startsWith("auth_user="));
-    if (authCookie) {
-      const authValue = authCookie.split("=")[1];
-      return JSON.parse(decodeURIComponent(authValue));
-    }
   } catch (error) {
-    console.error("Error parsing auth data:", error);
+    console.error("Error parsing stored auth:", error);
+    localStorage.removeItem("auth_user");
   }
 
   return null;
-};
-
-// Fungsi untuk menyimpan auth di localStorage dan cookie
-export const saveAuth = (auth: User | null) => {
-  try {
-    if (auth === null) {
-      localStorage.removeItem("auth_user");
-      document.cookie = "auth_user=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Strict";
-    } else {
-      const stringValue = JSON.stringify(auth);
-      localStorage.setItem("auth_user", stringValue);
-      document.cookie = `auth_user=${encodeURIComponent(stringValue)}; path=/; max-age=604800; SameSite=Strict`;
-    }
-  } catch (error) {
-    console.error("Error saving auth data:", error);
-  }
 };
