@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Camera, Clock, Info, LogIn, Users, Heart, Star, ArrowRight } from "lucide-react";
+import { Camera, Clock, Info, LogIn, Users, Heart, Star, ArrowRight, UserCheck } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import ImageCarousel from "../../components/ImageCarousel";
@@ -62,7 +62,7 @@ export default function TamuPage() {
               <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Temukan berbagai informasi menarik tentang perjalanan dan pencapaian kelas kami</p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {/* Memories Card */}
               <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }} whileHover={{ y: -10, scale: 1.02 }} className="group">
                 <Link href="/memories" className="block">
@@ -107,6 +107,33 @@ export default function TamuPage() {
                         <span>Pelajari Lebih</span>
                         <ArrowRight className="w-4 h-4 ml-2" />
                       </div>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+
+              {/* Profile Card - NEW */}
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.3 }} whileHover={{ y: -10, scale: 1.02 }} className="group">
+                <Link href="/dashboard/profile" className="block">
+                  <div className="relative bg-gradient-to-br from-orange-100 via-pink-50 to-purple-100 dark:from-orange-900/20 dark:via-pink-900/20 dark:to-purple-900/20 backdrop-blur-sm p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-orange-200/50 dark:border-orange-700/50 overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                    <div className="relative z-10">
+                      <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <UserCheck className="w-8 h-8 text-white" />
+                      </div>
+
+                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Profil Anggota</h3>
+
+                      <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">Kenali setiap anggota kelas 2383F dengan detail profil lengkap dan pencapaian mereka</p>
+
+                      <div className="flex items-center text-orange-600 dark:text-orange-400 font-semibold group-hover:translate-x-2 transition-transform duration-300">
+                        <span>Lihat Profil</span>
+                        <ArrowRight className="w-4 h-4 ml-2" />
+                      </div>
+
+                      {/* Special Badge */}
+                      <div className="absolute top-4 right-4 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">22 Anggota</div>
                     </div>
                   </div>
                 </Link>

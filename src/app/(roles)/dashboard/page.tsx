@@ -8,6 +8,7 @@ import { authAtom } from "@/lib/atoms/authAtom";
 import { Users, BarChart3, Calendar, Camera, Settings, FileText, Heart, Award, Clock, ArrowRight, User, Shield } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import ProtectedRoute from "../../../components/ProtectedRoute";
+import Footer from "@/app/components/Footer";
 
 export default function DashboardPage() {
   const auth = useAtomValue(authAtom);
@@ -107,7 +108,7 @@ export default function DashboardPage() {
   ];
 
   return (
-    <ProtectedRoute>
+    <>
       {/* <Navbar /> */}
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-slate-900">
         {/* Header Section */}
@@ -234,7 +235,8 @@ export default function DashboardPage() {
             </div>
           </div>
         </section>
+        <Footer />
       </div>
-    </ProtectedRoute>
+    </>
   );
 }
