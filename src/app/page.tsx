@@ -1,22 +1,27 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Loading from "./loading";
 
 export default function Home() {
   const router = useRouter();
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   useEffect(() => {
-    // Redirect langsung ke /tamu untuk pengunjung umum
-    router.push("/tamu");
+    // Set timer untuk redirect setelah 3 detik
+    const redirectTimer = setTimeout(() => {
+      setIsRedirecting(true);
+      router.push("/tamu");
+    }, 3000);
+
+    // Cleanup timer jika component unmount
+    return () => clearTimeout(redirectTimer);
   }, [router]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800">
-      <div className="text-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-        <p className="text-gray-600 dark:text-gray-300">Mengarahkan ke halaman utama...</p>
-      </div>
-    </div>
+    <>
+      <Loading />
+    </>
   );
 }
