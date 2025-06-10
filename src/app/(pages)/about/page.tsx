@@ -1,9 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Suspense, lazy } from "react";
 import { Users, Target, Heart, Lightbulb, Shield, Star } from "lucide-react";
 import Footer from "@/app/components/Footer";
-import Navbar from "@/app/components/Navbar";
+
+// Lazy load komponen berat
+const ValuesSection = lazy(() => import("@/app/components/ValuesSection"));
+const QuoteSection = lazy(() => import("@/app/components/QuoteSection"));
+
+// Loading component untuk Suspense
+const ComponentLoading = () => (
+  <div className="flex items-center justify-center py-12">
+    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+  </div>
+);
 
 const AboutPage: React.FC = () => {
   // Animation variants
@@ -50,33 +61,6 @@ const AboutPage: React.FC = () => {
     },
   };
 
-  const values = [
-    {
-      icon: Heart,
-      title: "Persahabatan Sejati",
-      description: "Ikatan yang terjalin bukan hanya dalam suka, tetapi juga dalam duka. Kami saling mendukung di setiap langkah perjalanan.",
-      color: "from-red-500 to-pink-500",
-    },
-    {
-      icon: Lightbulb,
-      title: "Inovasi Berkelanjutan",
-      description: "Selalu mencari cara baru untuk berkembang dan memberikan solusi terbaik melalui teknologi dan kreativitas.",
-      color: "from-yellow-500 to-orange-500",
-    },
-    {
-      icon: Shield,
-      title: "Integritas & Kepercayaan",
-      description: "Membangun fondasi yang kuat dengan kejujuran, transparansi, dan komitmen dalam setiap tindakan.",
-      color: "from-blue-500 to-indigo-500",
-    },
-    {
-      icon: Star,
-      title: "Keunggulan Bersama",
-      description: "Meraih prestasi tidak sebagai individu, tetapi sebagai satu kesatuan yang saling mengangkat dan menginspirasi.",
-      color: "from-purple-500 to-violet-500",
-    },
-  ];
-
   const missionItems = [
     "Menjalin hubungan yang penuh kepercayaan dan keterbukaan",
     "Berinovasi bersama untuk menciptakan solusi teknologi yang bermanfaat",
@@ -87,7 +71,6 @@ const AboutPage: React.FC = () => {
 
   return (
     <>
-      {/* <Navbar /> */}
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-slate-900">
         {/* Background Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -97,8 +80,8 @@ const AboutPage: React.FC = () => {
         </div>
 
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="relative z-10">
-          {/* Hero Section */}
-          <section className="pt-10 pb-8 px-4 sm:px-6 lg:px-8">
+          {/* Hero Section - Load immediately */}
+          <section className="pt-7 pb-8 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto text-center">
               <motion.div variants={itemVariants}>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
@@ -119,7 +102,7 @@ const AboutPage: React.FC = () => {
             </div>
           </section>
 
-          {/* Vision & Mission Section */}
+          {/* Vision & Mission Section - Load immediately karena penting */}
           <section className="py-16 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -173,55 +156,15 @@ const AboutPage: React.FC = () => {
             </div>
           </section>
 
-          {/* Values Section */}
-          <section className="py-6 px-4 sm:px-6 lg:px-8 bg-white/30 dark:bg-gray-800/20">
-            <div className="max-w-7xl mx-auto">
-              <motion.div variants={itemVariants} className="text-center mb-16">
-                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">Nilai-Nilai Kami</h2>
-                <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">Fondasi yang menguatkan setiap langkah perjalanan kami sebagai satu keluarga besar</p>
-              </motion.div>
+          {/* Values Section - Lazy Load */}
+          <Suspense fallback={<ComponentLoading />}>
+            <ValuesSection />
+          </Suspense>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                {values.map((value, index) => (
-                  <motion.div key={index} variants={cardVariants} whileHover="hover" initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: index * 0.1 }}>
-                    <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/50 dark:border-gray-700/50 text-center group overflow-hidden">
-                      {/* Background gradient */}
-                      <div className={`absolute inset-0 bg-gradient-to-br ${value.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
-
-                      <div className="relative z-10">
-                        <div className={`w-16 h-16 bg-gradient-to-r ${value.color} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                          <value.icon className="w-8 h-8 text-white" />
-                        </div>
-
-                        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{value.title}</h3>
-
-                        <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">{value.description}</p>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          {/* Quote Section */}
-          <section className="py-8 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto text-center">
-              <motion.div variants={itemVariants} className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 rounded-3xl blur-2xl" />
-                <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-8 sm:p-12 rounded-3xl shadow-xl border border-white/50 dark:border-gray-700/50">
-                  <div className="text-6xl text-blue-500/20 dark:text-blue-400/20 mb-4">"</div>
-                  <blockquote className="text-2xl sm:text-3xl font-medium text-gray-800 dark:text-gray-200 italic leading-relaxed mb-6">
-                    Dalam persahabatan, jarak hanyalah angka. Kedekatan sejati terletak di hati, dan ikatan yang tulus akan tetap kuat meski terpisah ruang dan waktu.
-                  </blockquote>
-                  <div className="flex items-center justify-center space-x-2 text-gray-600 dark:text-gray-400">
-                    <Heart className="w-5 h-5 text-red-500" />
-                    <span className="font-medium">Kelas 2383F</span>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </section>
+          {/* Quote Section - Lazy Load */}
+          <Suspense fallback={<ComponentLoading />}>
+            <QuoteSection />
+          </Suspense>
         </motion.div>
       </div>
       <Footer />

@@ -1,11 +1,38 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
-import Image from "next/image";
-import React, { useState, useMemo } from "react";
+
+import React, { useState, useMemo, Suspense, lazy } from "react";
 import { members } from "@/lib/data";
 import Footer from "@/app/components/Footer";
+
+// Lazy load komponen berat
+const ProfileGrid = lazy(() => import("@/app/components/ProfileGrid"));
+
+// Loading component untuk Suspense
+const ComponentLoading = () => (
+  <div className="flex items-center justify-center py-12">
+    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+  </div>
+);
+
+// Loading untuk grid cards
+const GridLoading = () => (
+  <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-6 sm:mb-8">
+    {Array.from({ length: 12 }).map((_, index) => (
+      <div key={index} className="bg-white/90 dark:bg-slate-800/80 backdrop-blur-xl p-3 sm:p-4 lg:p-6 rounded-xl sm:rounded-2xl shadow-md border border-white/20 dark:border-slate-700/50 animate-pulse">
+        <div className="relative mb-3 sm:mb-4">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto bg-gray-200 dark:bg-gray-700 rounded-full" />
+        </div>
+        <div className="text-center space-y-2">
+          <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded mx-auto w-24" />
+          <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded mx-auto w-20" />
+          <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded mx-auto w-16 mt-3" />
+        </div>
+      </div>
+    ))}
+  </div>
+);
 
 const ProfilePage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -36,52 +63,6 @@ const ProfilePage: React.FC = () => {
     setCurrentPage(1);
   }, [searchTerm]);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.06,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const cardVariants = {
-    hidden: {
-      opacity: 0,
-      y: 20,
-      scale: 0.95,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.4,
-        ease: [0.4, 0, 0.2, 1],
-      },
-    },
-    hover: {
-      y: -8,
-      scale: 1.02,
-      transition: {
-        duration: 0.2,
-        ease: [0.4, 0, 0.2, 1],
-      },
-    },
-  };
-
-  const imageVariants = {
-    hover: {
-      scale: 1.1,
-      transition: {
-        duration: 0.3,
-        ease: "easeInOut",
-      },
-    },
-  };
-
   return (
     <>
       <motion.div
@@ -93,7 +74,7 @@ const ProfilePage: React.FC = () => {
         text-gray-800 dark:text-gray-100 py-6 sm:py-8 lg:py-12 px-3 sm:px-6 lg:px-8"
       >
         <div className="max-w-7xl mx-auto">
-          {/* Header Section - Kompak untuk mobile */}
+          {/* Header Section - Load immediately */}
           <div className="text-center mb-6 sm:mb-8 lg:mb-12">
             <motion.h1
               initial={{ opacity: 0, y: -15 }}
@@ -150,106 +131,10 @@ const ProfilePage: React.FC = () => {
             />
           </div>
 
-          {/* Cards Grid - Optimized untuk mobile */}
-          <motion.div
-            key={currentPage} // Force re-animation on page change
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 
-            gap-3 sm:gap-4 lg:gap-6 mb-6 sm:mb-8"
-          >
-            {currentMembers.map((member, index) => (
-              <motion.div
-                key={`${member.name}-${currentPage}`}
-                variants={cardVariants}
-                whileHover="hover"
-                className="group relative bg-white/90 dark:bg-slate-800/80 backdrop-blur-xl 
-                p-3 sm:p-4 lg:p-6 rounded-xl sm:rounded-2xl 
-                shadow-md hover:shadow-xl transition-all duration-300
-                border border-white/20 dark:border-slate-700/50
-                hover:border-indigo-200 dark:hover:border-indigo-700/50
-                overflow-hidden"
-              >
-                {/* Background gradient overlay */}
-                <div
-                  className="absolute inset-0 bg-gradient-to-br from-indigo-50/50 to-purple-50/30 
-                dark:from-indigo-900/20 dark:to-purple-900/10 opacity-0 group-hover:opacity-100 
-                transition-opacity duration-300 rounded-xl sm:rounded-2xl"
-                />
-
-                {/* Content */}
-                <div className="relative z-10">
-                  {/* Profile Image - Lebih kecil untuk mobile */}
-                  <div className="relative mb-3 sm:mb-4">
-                    <motion.div variants={imageVariants} whileHover="hover" className="relative group/image mx-auto w-fit">
-                      {/* Animated background ring */}
-                      <div
-                        className="absolute -inset-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 
-                      rounded-full opacity-0 group-hover:opacity-60 blur-sm transition-all duration-300"
-                      />
-
-                      {/* Image container - Responsive sizes */}
-                      <div className="relative w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto">
-                        <Image
-                          src={member.imageUrl.startsWith("/") ? member.imageUrl : `/${member.imageUrl}`}
-                          alt={`Profile picture of ${member.name}`}
-                          fill
-                          sizes="(max-width: 640px) 64px, (max-width: 1024px) 80px, 96px"
-                          className="rounded-full object-cover
-                          ring-2 sm:ring-3 ring-white dark:ring-slate-800 
-                          group-hover/image:ring-indigo-200 dark:group-hover/image:ring-indigo-700/50
-                          transition-all duration-300
-                          shadow-md group-hover/image:shadow-lg"
-                          loading={index < 6 ? "eager" : "lazy"}
-                        />
-                      </div>
-                    </motion.div>
-                  </div>
-
-                  {/* Member Info - Kompak untuk mobile */}
-                  <div className="text-center space-y-1 sm:space-y-2">
-                    <h3
-                      className="text-sm sm:text-base lg:text-lg font-bold 
-                    bg-gradient-to-r from-indigo-600 to-purple-600 
-                    dark:from-indigo-400 dark:to-purple-400
-                    bg-clip-text text-transparent 
-                    group-hover:from-indigo-700 group-hover:to-purple-700
-                    dark:group-hover:from-indigo-300 dark:group-hover:to-purple-300
-                    transition-all duration-300 leading-tight"
-                    >
-                      {member.name}
-                    </h3>
-
-                    <p
-                      className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 
-                    font-medium leading-relaxed line-clamp-2"
-                    >
-                      {member.role}
-                    </p>
-
-                    {/* Detail Link - Lebih kecil untuk mobile */}
-                    <Link
-                      href={`/dashboard/profile/${member.name.toLowerCase().replace(/\s+/g, "-")}`}
-                      className="inline-block mt-2 sm:mt-3 px-3 sm:px-4 py-1.5 sm:py-2 
-                      bg-gradient-to-r from-indigo-50 to-purple-50 
-                      dark:from-indigo-900/30 dark:to-purple-900/30
-                      text-indigo-600 dark:text-indigo-300 rounded-full 
-                      hover:from-indigo-100 hover:to-purple-100
-                      dark:hover:from-indigo-800/50 dark:hover:to-purple-800/50
-                      transition-all duration-200 font-medium text-xs sm:text-sm
-                      hover:shadow-md hover:scale-105
-                      border border-indigo-100 dark:border-indigo-800/50
-                      hover:border-indigo-200 dark:hover:border-indigo-700/50
-                      backdrop-blur-sm"
-                    >
-                      Detail
-                    </Link>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+          {/* Cards Grid - Lazy Load dengan Custom Loading */}
+          <Suspense fallback={<GridLoading />}>
+            <ProfileGrid members={currentMembers} currentPage={currentPage} />
+          </Suspense>
 
           {/* Pagination */}
           {totalPages > 1 && (
@@ -306,7 +191,7 @@ const ProfilePage: React.FC = () => {
             </motion.div>
           )}
 
-          {/* Footer Quote - Lebih kompak */}
+          {/* Footer Quote - Load immediately */}
           <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.6 }} className="text-center">
             <div className="max-w-2xl mx-auto px-4">
               <motion.div
