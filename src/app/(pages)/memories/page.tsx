@@ -6,7 +6,6 @@ import Footer from "../../components/Footer";
 
 // Lazy load komponen berat
 const Timeline = lazy(() => import("../../components/Timeline"));
-const ClassStats = lazy(() => import("../../components/ClassStats"));
 const AnimatedBackground = lazy(() => import("../../components/AnimatedBackground"));
 
 // Loading component untuk Suspense
