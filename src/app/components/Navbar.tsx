@@ -26,7 +26,7 @@ const Navbar: React.FC = () => {
     const baseItems = [
       { name: "Beranda", href: "/tamu", icon: Home },
       { name: "Tentang", href: "/about", icon: Users },
-      { name: "Memories", href: "/memories", icon: Clock },
+      // { name: "Memories", href: "/memories", icon: Clock },
       { name: "Profil Anggota", href: "/dashboard/profile", icon: UserCheck },
       { name: "Video Kelas", href: "/videos", icon: Video },
     ];
