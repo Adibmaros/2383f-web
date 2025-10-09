@@ -3,7 +3,7 @@ import { urlFor } from "@/lib/sanity";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-export default async function CategoryPage({ params }: { params: any }) {
+export default async function CategoryPage({ params }: any) {
   try {
     const [category, posts] = await Promise.all([getCategoryBySlug(params.slug), getPostsByCategory(params.slug)]);
 
@@ -36,31 +36,22 @@ export default async function CategoryPage({ params }: { params: any }) {
         ) : (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {posts.map((post: any) => (
-              <article
-                key={post._id}
-                className="bg-white border border-gray-200 rounded-xl overflow-hidden 
-                         hover:shadow-lg transition-shadow duration-300"
-              >
+              <article key={post._id} className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-shadow duration-300">
                 {post.mainImage && (
                   <div className="relative h-48 sm:h-56">
                     <img src={urlFor(post.mainImage).width(600).url()} alt={post.title} className="w-full h-full object-cover" />
                   </div>
                 )}
                 <div className="p-6">
-                  <Link href={`/post/${post.slug.current}`}>
-                    <h2
-                      className="text-xl font-bold text-gray-900 mb-2 
-                               hover:text-blue-600 transition-colors line-clamp-2"
-                    >
-                      {post.title}
-                    </h2>
+                  <Link href={post.slug ? `/post/${post.slug}` : "#"}>
+                    <h2 className="text-xl font-bold text-gray-900 mb-2 hover:text-blue-600 transition-colors line-clamp-2">{post.title}</h2>
                   </Link>
                   <p className="text-gray-600 text-sm mb-4 line-clamp-3">{post.excerpt}</p>
                   <div className="flex items-center justify-between mt-4 pt-4 border-t">
                     <div className="flex items-center">
-                      {post.author?.image && <img src={urlFor(post.author.image).width(40).height(40).url()} alt={post.author.name} className="w-8 h-8 rounded-full mr-3 object-cover" />}
+                      {post.author?.image && <img src={urlFor(post.author.image).width(40).height(40).url()} alt={post.author.name || "Author"} className="w-8 h-8 rounded-full mr-3 object-cover" />}
                       <div>
-                        <Link href={`/author/${post.author?.slug?.current}`} className="text-sm font-medium text-gray-900 hover:text-blue-600">
+                        <Link href={post.author?.slug ? `/author/${post.author.slug}` : "#"} className="text-sm font-medium text-gray-900 hover:text-blue-600">
                           {post.author?.name ?? "Unknown"}
                         </Link>
                         <p className="text-xs text-gray-500">{new Date(post.publishedAt).toLocaleDateString()}</p>

@@ -28,16 +28,19 @@ export async function getAllPosts(): Promise<any> {
     *[_type == "post"] | order(publishedAt desc) {
       _id,
       title,
-      slug,
+      "slug": slug.current,
       mainImage,
       publishedAt,
-      "author": author->{name, slug, image},
+      "author": author->{
+        _id,
+        name, 
+        "slug": slug.current,
+        image
+      },
       "categories": categories[]->{
         _id,
         title,
-        slug {
-          current
-        }
+        "slug": slug.current
       },
       "excerpt": array::join(string::split((pt::text(body)), "")[0..200], "") + "..."
     }
