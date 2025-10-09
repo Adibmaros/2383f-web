@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Home, Users, Clock, BarChart3, User, LogOut, UserCheck, Video } from "lucide-react";
+import { Menu, X, Home, Users, Clock, BarChart3, User, LogOut, UserCheck, Video, Book } from "lucide-react";
 import { useAtom } from "jotai";
 import { authAtom, saveAuth } from "@/lib/atoms/authAtom";
 import { useRouter } from "next/navigation";
@@ -29,6 +29,7 @@ const Navbar: React.FC = () => {
       // { name: "Memories", href: "/memories", icon: Clock },
       { name: "Profil Anggota", href: "/dashboard/profile", icon: UserCheck },
       { name: "Video Kelas", href: "/videos", icon: Video },
+      { name: "Blog", href: "/blog", icon: Book }, // Add this new item
     ];
 
     if (auth?.isAuthenticated) {
