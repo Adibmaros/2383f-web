@@ -3,14 +3,14 @@ import { useState, useEffect } from "react";
 import { writeClient as client } from "@/lib/sanity";
 import { useRouter } from "next/navigation";
 import { getCategoryBySlug } from "@/lib/sanity";
-import { use } from "react";
+// import { use } from "react";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
-export default function EditCategoryPage({ params }: { params: Promise<{ slug: string }> }) {
-  const resolvedParams = use(params);
+export default function EditCategoryPage({ params }: any) {
+  // const resolvedParams = use(params);
   const router = useRouter();
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<any>({
     _id: "",
     title: "",
     description: "",
@@ -22,7 +22,7 @@ export default function EditCategoryPage({ params }: { params: Promise<{ slug: s
 
   const loadCategory = async () => {
     try {
-      const category = await getCategoryBySlug(resolvedParams.slug);
+      const category = await getCategoryBySlug(params.slug as any);
       if (category) {
         setFormData({
           _id: category._id,

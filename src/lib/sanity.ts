@@ -22,8 +22,8 @@ export function urlFor(source: any) {
   return builder.image(source);
 }
 
-// Query untuk mengambil semua posts
-export async function getAllPosts() {
+// Update return types and parameters for all functions
+export async function getAllPosts(): Promise<any> {
   const posts = await client.fetch(`
     *[_type == "post"] | order(publishedAt desc) {
       _id,
@@ -47,7 +47,7 @@ export async function getAllPosts() {
 }
 
 // Query untuk mengambil single post berdasarkan slug
-export async function getPostBySlug(slug: any) {
+export async function getPostBySlug(slug: any): Promise<any> {
   const query = `
     *[_type == "post" && slug.current == $slug][0] {
       _id,
@@ -85,7 +85,7 @@ export async function getPostBySlug(slug: any) {
 }
 
 // Query untuk mengambil posts berdasarkan category
-export async function getPostsByCategory(categorySlug: any) {
+export async function getPostsByCategory(categorySlug: any): Promise<any> {
   const query = `
     *[_type == "post" && references(*[_type == "category" && slug.current == $categorySlug]._id)] | order(publishedAt desc) {
       _id,
@@ -113,7 +113,7 @@ export async function getPostsByCategory(categorySlug: any) {
 }
 
 // Query untuk mengambil posts berdasarkan author
-export async function getPostsByAuthor(authorSlug: any) {
+export async function getPostsByAuthor(authorSlug: any): Promise<any> {
   const query = `
     *[_type == "post" && author->slug.current == $authorSlug] | order(publishedAt desc) {
       _id,
@@ -147,7 +147,7 @@ export async function getPostsByAuthor(authorSlug: any) {
 }
 
 // Query untuk mengambil semua categories
-export async function getAllCategories() {
+export async function getAllCategories(): Promise<any> {
   const query = `
     *[_type == "category"] | order(title asc) {
       _id,
@@ -169,7 +169,7 @@ export async function getAllCategories() {
 }
 
 // Query untuk mengambil single category
-export async function getCategoryBySlug(slug: any) {
+export async function getCategoryBySlug(slug: any): Promise<any> {
   const query = `
     *[_type == "category" && slug.current == $slug][0] {
       _id,
@@ -191,7 +191,7 @@ export async function getCategoryBySlug(slug: any) {
 }
 
 // Query untuk mengambil semua authors
-export async function getAllAuthors() {
+export async function getAllAuthors(): Promise<any> {
   const authors = await client.fetch(`
     *[_type == "author"] | order(name asc) {
       _id,
@@ -206,7 +206,7 @@ export async function getAllAuthors() {
 }
 
 // Query untuk mengambil single author
-export async function getAuthorBySlug(slug: any) {
+export async function getAuthorBySlug(slug: any): Promise<any> {
   const query = `
     *[_type == "author" && slug.current == $slug][0] {
       _id,
