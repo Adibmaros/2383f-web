@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { notFound } from "next/navigation";
 import { members } from "@/lib/data";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -27,21 +27,27 @@ const ProfileDetailPage = ({ params }: any) => {
     { label: "Tujuan Kelas", value: member.classGoals, icon: "🎯", color: "from-indigo-500 to-blue-500" },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
+  const containerVariants: Variants = {
+    hidden: {
+      opacity: 0,
+      scale: 0.95,
+      y: 20,
+    },
     visible: {
       opacity: 1,
+      scale: 1,
+      y: 0,
       transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.1,
+        duration: 0.6,
+        ease: [0.43, 0.13, 0.23, 0.96] as [number, number, number, number],
       },
     },
   };
 
-  const itemVariants = {
+  const cardVariants: Variants = {
     hidden: {
       opacity: 0,
-      y: 15,
+      y: 20,
       scale: 0.95,
     },
     visible: {
@@ -49,13 +55,30 @@ const ProfileDetailPage = ({ params }: any) => {
       y: 0,
       scale: 1,
       transition: {
-        duration: 0.4,
-        ease: "easeOut",
+        duration: 0.5,
+        ease: "easeInOut",
       },
     },
   };
 
-  const profileVariants = {
+  const itemVariants: Variants = {
+    hidden: {
+      opacity: 0,
+      y: 20,
+      scale: 0.95,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: [0.43, 0.13, 0.23, 0.96] as [number, number, number, number],
+      },
+    },
+  };
+
+  const profileVariants: Variants = {
     hidden: {
       opacity: 0,
       scale: 0.8,
@@ -67,7 +90,7 @@ const ProfileDetailPage = ({ params }: any) => {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: [0.4, 0, 0.2, 1],
+        ease: [0.4, 0, 0.2, 1] as [number, number, number, number],
       },
     },
   };
