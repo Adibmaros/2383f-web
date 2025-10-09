@@ -4,7 +4,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
 
-export default async function AuthorPage({ params }: { params: { slug: string } }) {
+interface PageProps {
+  params: {
+    slug: string;
+  };
+  searchParams: { [key: string]: string | string[] | undefined };
+}
+
+export default async function AuthorPage({ params }: PageProps) {
   try {
     console.log("Fetching author with slug:", params.slug);
     const [author, posts] = await Promise.all([getAuthorBySlug(params.slug), getPostsByAuthor(params.slug)]);
