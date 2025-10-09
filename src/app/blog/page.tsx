@@ -57,29 +57,15 @@ export default async function BlogPage() {
             ) : (
               posts.map((post: any) => (
                 <article key={post._id} className="border rounded-lg overflow-hidden">
-                  {post.mainImage && (
-                    <img
-                      src={urlFor(post.mainImage).width(600).url()}
-                      alt={post.title}
-                      className="w-full h-48 object-cover"
-                    />
-                  )}
+                  {post.mainImage && <img src={urlFor(post.mainImage).width(600).url()} alt={post.title} className="w-full h-48 object-cover" />}
                   <div className="p-4">
                     <Link href={`/post/${post.slug}`}>
                       <h2 className="text-xl font-bold hover:text-blue-500">{post.title}</h2>
                     </Link>
+                    <p className="text-gray-600 mt-2">{post.excerpt}</p>
                     <div className="mt-4 flex items-center">
-                      {post.author?.image && (
-                        <img
-                          src={urlFor(post.author.image).width(40).height(40).url()}
-                          alt={post.author.name}
-                          className="w-10 h-10 rounded-full mr-2"
-                        />
-                      )}
-                      <Link
-                        href={`/author/${post.author?.slug}`}
-                        className="text-blue-500 hover:text-blue-700"
-                      >
+                      {post.author?.image && <img src={urlFor(post.author.image).width(40).height(40).url()} alt={post.author.name} className="w-10 h-10 rounded-full mr-2" />}
+                      <Link href={`/author/${post.author?.slug}`} className="text-blue-500 hover:text-blue-700">
                         {post.author?.name ?? "Unknown"}
                       </Link>
                     </div>
@@ -103,10 +89,6 @@ export default async function BlogPage() {
             Kembali ke beranda
           </Link>
         </p>
-      </div>
-    );
-  }
-}
       </div>
     );
   }
