@@ -4,17 +4,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
 
-type Props = {
-  params: Promise<{ slug: string }>;
-
-  searchParams: { [key: string]: string | string[] | undefined };
-};
-
-export default async function AuthorPage({ params }: Props) {
-  const resolvedParams = await params;
-
+export default async function AuthorPage({ params }: any) {
   try {
-    const [author, posts] = await Promise.all([getAuthorBySlug(resolvedParams.slug), getPostsByAuthor(resolvedParams.slug)]);
+    const [author, posts] = await Promise.all([getAuthorBySlug(params.slug), getPostsByAuthor(params.slug)]);
 
     if (!author) {
       return notFound();
