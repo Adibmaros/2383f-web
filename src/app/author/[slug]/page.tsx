@@ -18,7 +18,7 @@ export default async function AuthorPage({ params }: { params: { slug: string } 
     }
 
     return (
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 coba">
         <div className="mb-12 text-center">
           {author.image && <img src={urlFor(author.image).width(150).height(150).url()} alt={author.name} className="w-32 h-32 rounded-full mx-auto mb-4" />}
           <h1 className="text-3xl font-bold mb-2">{author.name}</h1>
