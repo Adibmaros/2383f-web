@@ -9,18 +9,10 @@ const ValuesSection = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.7,
-        ease: [0.4, 0, 0.2, 1],
-      },
     },
     hover: {
       y: -10,
       scale: 1.02,
-      transition: {
-        duration: 0.3,
-        ease: [0.4, 0, 0.2, 1],
-      },
     },
   };
 
@@ -29,10 +21,6 @@ const ValuesSection = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.4, 0, 0.2, 1],
-      },
     },
   };
 
@@ -66,14 +54,14 @@ const ValuesSection = () => {
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white/30 dark:bg-gray-800/20">
       <div className="max-w-7xl mx-auto">
-        <motion.div variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-center mb-16">
+        <motion.div variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">Nilai-Nilai Kami</h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">Fondasi yang menguatkan setiap langkah perjalanan kami sebagai satu keluarga besar</p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {values.map((value, index) => (
-            <motion.div key={index} variants={cardVariants} whileHover="hover" initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: index * 0.1 }}>
+            <motion.div key={index} variants={cardVariants} whileHover="hover" initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: index * 0.1, duration: 0.7 }}>
               <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/50 dark:border-gray-700/50 text-center group overflow-hidden">
                 {/* Background gradient */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${value.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
