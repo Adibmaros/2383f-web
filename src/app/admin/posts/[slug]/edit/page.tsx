@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 import { getAllAuthors, getAllCategories, getPostBySlug } from "@/lib/sanity";
 import { use } from "react";
 
-export default function EditPostPage({ params }: { params: Promise<{ slug: string }> }) {
-  const resolvedParams = use(params);
+export default function EditPostPage({ params }: any) {
+  const resolvedParams = use(params) as { slug: string };
   const router = useRouter();
   const [authors, setAuthors] = useState([]);
   const [categories, setCategories] = useState([]);

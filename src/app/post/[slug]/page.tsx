@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, Clock } from "lucide-react";
 import ShareButton from "@/components/ShareButton";
 
-export default async function PostPage({ params }: { params: { slug: string } }) {
+export default async function PostPage({ params }: any) {
   try {
     const post = await getPostBySlug(params.slug);
     console.log("Post categories:", post?.categories); // Debug log

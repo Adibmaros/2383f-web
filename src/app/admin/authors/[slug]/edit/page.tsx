@@ -5,14 +5,13 @@ import { useRouter } from "next/navigation";
 import { getAuthorBySlug } from "@/lib/sanity";
 import { use } from "react";
 
-export default function EditAuthorPage({ params }: { params: Promise<{ slug: string }> }) {
-  const resolvedParams = use(params);
+export default function EditAuthorPage({ params }: any) {
   const router = useRouter();
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<any>({
     _id: "",
     name: "",
     bio: "",
-    image: null as any,
+    image: null,
   });
   const [imageFile, setImageFile] = useState<File | null>(null);
 
@@ -22,7 +21,7 @@ export default function EditAuthorPage({ params }: { params: Promise<{ slug: str
 
   const loadAuthor = async () => {
     try {
-      const author = await getAuthorBySlug(resolvedParams.slug);
+      const author = await getAuthorBySlug(params.slug);
       if (author) {
         setFormData({
           _id: author._id,
