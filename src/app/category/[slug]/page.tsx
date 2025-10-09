@@ -3,7 +3,7 @@ import { urlFor } from "@/lib/sanity";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-export default async function CategoryPage({ params }: any) {
+export default async function CategoryPage({ params }: { params: any }) {
   try {
     const [category, posts] = await Promise.all([getCategoryBySlug(params.slug), getPostsByCategory(params.slug)]);
 

@@ -1,51 +1,59 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants, easeInOut } from "framer-motion";
 import Link from "next/link";
 import { Home, ArrowLeft, Search, Users, Clock } from "lucide-react";
 
+const containerVariants: Variants = {
+  hidden: { opacity: 0, y: 20, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      ease: "easeInOut",
+    },
+  },
+};
+
+const floatVariants: Variants = {
+  animate: {
+    y: [0, -10, 0],
+    rotate: [0, 5, 0],
+    transition: {
+      duration: 3,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+};
+
+const bounceVariants: Variants = {
+  animate: {
+    scale: [1, 1.1, 1],
+    transition: {
+      duration: 2,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  },
+};
+
 export default function NotFound() {
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: {
-      opacity: 0,
-      y: 30,
-      scale: 0.9,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.6,
-        ease: [0.4, 0, 0.2, 1],
-      },
-    },
-  };
-
-  const floatingVariants = {
-    animate: {
-      y: [-10, 10, -10],
-      rotate: [0, 5, -5, 0],
-      transition: {
-        duration: 4,
-        repeat: Infinity,
-        ease: "easeInOut",
-      },
-    },
-  };
-
   const quickLinks = [
     {
       name: "Beranda",
@@ -82,7 +90,7 @@ export default function NotFound() {
       <motion.div variants={containerVariants} initial="hidden" animate="visible" className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
         {/* 404 Number with Animation */}
         <motion.div variants={itemVariants} className="mb-8">
-          <motion.div variants={floatingVariants} animate="animate" className="relative inline-block">
+          <motion.div variants={floatVariants} animate="animate" className="relative inline-block">
             <h1 className="text-8xl sm:text-9xl lg:text-[12rem] font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent leading-none">404</h1>
 
             {/* Floating Decorative Elements */}
@@ -167,7 +175,14 @@ export default function NotFound() {
           >
             <Home className="w-5 h-5 mr-2" />
             Kembali ke Beranda
-            <motion.div animate={{ x: [0, 5, 0] }} transition={{ duration: 1.5, repeat: Infinity }} className="ml-2">
+            <motion.div
+              animate={{ x: [0, 5, 0] }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+              }}
+              className="ml-2"
+            >
               →
             </motion.div>
           </Link>

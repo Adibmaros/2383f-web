@@ -1,72 +1,69 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants, Easing, easeInOut, easeOut } from "framer-motion";
 import { Users, Clock, BookOpen } from "lucide-react";
 
+const containerVariants: Variants = {
+  hidden: { opacity: 0, y: 20, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      ease: easeInOut, // Use Framer Motion easing function
+    },
+  },
+};
+
+const pulseVariants: Variants = {
+  animate: {
+    scale: [1, 1.1, 1],
+    opacity: [0.5, 1, 0.5],
+    transition: {
+      duration: 2,
+      repeat: Infinity,
+      ease: "easeInOut", // Use string-based easing
+    },
+  },
+};
+
+const spinnerVariants: Variants = {
+  animate: {
+    rotate: 360,
+    transition: {
+      duration: 1,
+      repeat: Infinity,
+      ease: "linear", // Use string-based easing
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      ease: easeOut, // Use Framer Motion easing function
+    },
+  },
+};
+
+const scaleVariants: Variants = {
+  animate: {
+    scale: [0.9, 1, 0.9],
+    transition: {
+      duration: 1.5,
+      repeat: Infinity,
+      ease: "easeInOut", // Use string-based easing
+    },
+  },
+};
+
 export default function Loading() {
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: {
-      opacity: 0,
-      y: 20,
-      scale: 0.8,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.6,
-        ease: [0.4, 0, 0.2, 1],
-      },
-    },
-  };
-
-  const pulseVariants = {
-    animate: {
-      scale: [1, 1.2, 1],
-      opacity: [0.7, 1, 0.7],
-      transition: {
-        duration: 2,
-        repeat: Infinity,
-        ease: "easeInOut",
-      },
-    },
-  };
-
-  const spinVariants = {
-    animate: {
-      rotate: 360,
-      transition: {
-        duration: 2,
-        repeat: Infinity,
-        ease: "linear",
-      },
-    },
-  };
-
-  const dotsVariants = {
-    animate: {
-      scale: [1, 1.5, 1],
-      transition: {
-        duration: 0.8,
-        repeat: Infinity,
-        ease: "easeInOut",
-      },
-    },
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-slate-900 flex items-center justify-center relative overflow-hidden">
       {/* Background Elements */}
@@ -94,7 +91,7 @@ export default function Loading() {
         <motion.div variants={itemVariants} className="mb-8">
           <div className="relative">
             {/* Main Spinner */}
-            <motion.div variants={spinVariants} animate="animate" className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-6">
+            <motion.div variants={spinnerVariants} animate="animate" className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-6">
               <div className="w-full h-full border-4 border-blue-200 dark:border-blue-800 border-t-blue-600 dark:border-t-blue-400 rounded-full"></div>
             </motion.div>
 
@@ -167,7 +164,7 @@ export default function Loading() {
           {[0, 1, 2].map((index) => (
             <motion.div
               key={index}
-              variants={dotsVariants}
+              variants={scaleVariants}
               animate="animate"
               transition={{
                 delay: index * 0.2,

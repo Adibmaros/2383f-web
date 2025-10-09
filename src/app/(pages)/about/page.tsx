@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Suspense, lazy } from "react";
 import { Users, Target, Heart, Lightbulb, Shield, Star } from "lucide-react";
 import Footer from "@/app/components/Footer";
@@ -18,7 +18,7 @@ const ComponentLoading = () => (
 
 const AboutPage: React.FC = () => {
   // Animation variants
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -29,26 +29,26 @@ const AboutPage: React.FC = () => {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.6,
-        ease: [0.4, 0, 0.2, 1],
+        ease: [0.42, 0, 0.58, 1], // cubic-bezier for easeInOut
       },
     },
   };
 
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.7,
-        ease: [0.4, 0, 0.2, 1],
+        ease: "easeInOut",
       },
     },
     hover: {
@@ -56,7 +56,7 @@ const AboutPage: React.FC = () => {
       scale: 1.02,
       transition: {
         duration: 0.3,
-        ease: [0.4, 0, 0.2, 1],
+        ease: "easeInOut",
       },
     },
   };

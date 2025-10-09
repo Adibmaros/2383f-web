@@ -7,10 +7,16 @@ import { getCategoryBySlug } from "@/lib/sanity";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
-export default function EditCategoryPage({ params }: any) {
+interface CategoryFormData {
+  _id: string;
+  title: string;
+  description: string;
+}
+
+export default function EditCategoryPage({ params }: { params: any }) {
   // const resolvedParams = use(params);
   const router = useRouter();
-  const [formData, setFormData] = useState<any>({
+  const [formData, setFormData] = useState<CategoryFormData>({
     _id: "",
     title: "",
     description: "",
@@ -22,7 +28,7 @@ export default function EditCategoryPage({ params }: any) {
 
   const loadCategory = async () => {
     try {
-      const category = await getCategoryBySlug(params.slug as any);
+      const category = await getCategoryBySlug(params.slug);
       if (category) {
         setFormData({
           _id: category._id,
