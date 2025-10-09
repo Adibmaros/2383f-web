@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Calendar, MapPin, Users, BookOpen, Trophy, Heart, Camera, Coffee } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -65,7 +65,7 @@ const timelineEvents = [
 
 export default function Timeline() {
   // Container animation variants
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -77,7 +77,7 @@ export default function Timeline() {
   };
 
   // Item animation variants
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: {
       opacity: 0,
       x: -100,
@@ -89,13 +89,13 @@ export default function Timeline() {
       scale: 1,
       transition: {
         duration: 0.6,
-        ease: [0.4, 0, 0.2, 1],
+        ease: [0.4, 0, 0.2, 1] as [number, number, number, number],
       },
     },
   };
 
   // Icon animation variants
-  const iconVariants = {
+  const iconVariants: Variants = {
     hidden: { scale: 0, rotate: -180 },
     visible: {
       scale: 1,

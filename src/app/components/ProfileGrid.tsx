@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { members } from "@/lib/data";
@@ -11,7 +11,7 @@ interface ProfileGridProps {
 }
 
 const ProfileGrid: React.FC<ProfileGridProps> = ({ members, currentPage }) => {
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -22,7 +22,7 @@ const ProfileGrid: React.FC<ProfileGridProps> = ({ members, currentPage }) => {
     },
   };
 
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: {
       opacity: 0,
       y: 20,
@@ -34,7 +34,7 @@ const ProfileGrid: React.FC<ProfileGridProps> = ({ members, currentPage }) => {
       scale: 1,
       transition: {
         duration: 0.4,
-        ease: [0.4, 0, 0.2, 1],
+        ease: [0.4, 0, 0.2, 1] as [number, number, number, number],
       },
     },
     hover: {
@@ -42,12 +42,12 @@ const ProfileGrid: React.FC<ProfileGridProps> = ({ members, currentPage }) => {
       scale: 1.02,
       transition: {
         duration: 0.2,
-        ease: [0.4, 0, 0.2, 1],
+        ease: [0.4, 0, 0.2, 1] as [number, number, number, number],
       },
     },
   };
 
-  const imageVariants = {
+  const imageVariants: Variants = {
     hover: {
       scale: 1.1,
       transition: {
