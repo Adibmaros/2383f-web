@@ -23,38 +23,6 @@ export const metadata: Metadata = {
       },
     ],
     shortcut: "/logo-kelas.svg",
-    apple: [
-      {
-        url: "/logo-kelas.svg",
-        sizes: "180x180",
-        type: "image/svg+xml",
-      },
-    ],
-  },
-  manifest: "/manifest.json",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#3b82f6" },
-    { media: "(prefers-color-scheme: dark)", color: "#1e40af" },
-  ],
-  openGraph: {
-    title: "Kelas 2383F - Sistem Informasi",
-    description: "Website resmi Kelas 2383F Program Studi Sistem Informasi",
-    type: "website",
-    locale: "id_ID",
-    images: [
-      {
-        url: "/logo-kelas.svg",
-        width: 1200,
-        height: 630,
-        alt: "Logo Kelas 2383F",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Kelas 2383F - Sistem Informasi",
-    description: "Website resmi Kelas 2383F Program Studi Sistem Informasi",
-    images: ["/logo-kelas.svg"],
   },
 };
 

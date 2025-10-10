@@ -120,28 +120,59 @@ export default function NewPostPage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto">
-      <h1 className="text-2xl font-bold mb-6">New Post</h1>
+    <div className="max-w-2xl mx-auto px-4 py-8">
+      <h1 className="text-2xl font-bold mb-6 text-gray-900 dark:text-gray-100">New Post</h1>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label className="block mb-2">Title</label>
-          <input type="text" value={formData.title} onChange={(e) => setFormData({ ...formData, title: e.target.value })} className="w-full p-2 border rounded" required />
+          <label className="block mb-2 text-gray-700 dark:text-gray-200">Title</label>
+          <input
+            type="text"
+            value={formData.title}
+            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+            className="w-full p-3 border border-gray-200 dark:border-gray-700 rounded-lg
+                     bg-white dark:bg-gray-800/50 text-gray-900 dark:text-gray-100
+                     focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400
+                     transition-colors backdrop-blur-sm"
+            required
+          />
         </div>
 
         <div>
-          <label className="block mb-2">Main Image</label>
-          <input type="file" accept="image/*" onChange={handleImageUpload} className="w-full p-2 border rounded" />
+          <label className="block mb-2 text-gray-700 dark:text-gray-200">Main Image</label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            className="w-full p-3 border border-gray-200 dark:border-gray-700 rounded-lg
+                     bg-white dark:bg-gray-800/50 text-gray-900 dark:text-gray-100
+                     file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0
+                     file:bg-blue-500 file:text-white hover:file:bg-blue-600
+                     transition-colors"
+          />
           {imageFile && (
-            <div className="mt-2">
-              <img src={URL.createObjectURL(imageFile)} alt="Preview" className="w-32 h-32 object-cover" />
+            <div className="mt-3">
+              <img
+                src={URL.createObjectURL(imageFile)}
+                alt="Preview"
+                className="w-32 h-32 object-cover rounded-lg border
+                         border-gray-200 dark:border-gray-700"
+              />
             </div>
           )}
         </div>
 
         <div>
-          <label className="block mb-2">Author</label>
-          <select value={formData.authorId} onChange={(e) => setFormData({ ...formData, authorId: e.target.value })} className="w-full p-2 border rounded" required>
+          <label className="block mb-2 text-gray-700 dark:text-gray-200">Author</label>
+          <select
+            value={formData.authorId}
+            onChange={(e) => setFormData({ ...formData, authorId: e.target.value })}
+            className="w-full p-3 border border-gray-200 dark:border-gray-700 rounded-lg
+                     bg-white dark:bg-gray-800/50 text-gray-900 dark:text-gray-100
+                     focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400
+                     transition-colors"
+            required
+          >
             <option value="">Select an author</option>
             {authors.map((author: any) => (
               <option key={author._id} value={author._id}>
@@ -152,7 +183,7 @@ export default function NewPostPage() {
         </div>
 
         <div>
-          <label className="block mb-2">Categories</label>
+          <label className="block mb-2 text-gray-700 dark:text-gray-200">Categories</label>
           <div className="flex flex-wrap gap-2">
             {categories.map((category: any) => (
               <button
@@ -168,12 +199,26 @@ export default function NewPostPage() {
         </div>
 
         <div>
-          <label className="block mb-2">Content (blockContent)</label>
-          <textarea value={formData.body} onChange={(e) => setFormData({ ...formData, body: e.target.value })} className="w-full p-2 border rounded" rows={10} required />
-          <p className="text-sm text-gray-500 mt-1">Basic text content. For rich text, consider using a rich text editor component.</p>
+          <label className="block mb-2 text-gray-700 dark:text-gray-200">Content</label>
+          <textarea
+            value={formData.body}
+            onChange={(e) => setFormData({ ...formData, body: e.target.value })}
+            className="w-full p-3 border border-gray-200 dark:border-gray-700 rounded-lg
+                     bg-white dark:bg-gray-800/50 text-gray-900 dark:text-gray-100
+                     focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400
+                     transition-colors min-h-[200px] resize-y"
+            required
+          />
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">Basic text content. For rich text, consider using a rich text editor component.</p>
         </div>
 
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
+        <button
+          type="submit"
+          className="bg-blue-500 dark:bg-blue-600 text-white px-6 py-3 rounded-lg
+                   hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors
+                   focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400
+                   font-medium"
+        >
           Create Post
         </button>
       </form>

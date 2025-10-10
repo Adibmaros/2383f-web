@@ -73,48 +73,69 @@ export default function NewAuthorPage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-8">
-      <Link href="/admin/authors" className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700 mb-6">
+    <div className="max-w-2xl mx-auto px-4 py-8 dark:border-gray-700 dark:shadow-xl">
+      <Link
+        href="/admin/authors"
+        className="inline-flex items-center text-sm text-gray-600 dark:text-gray-300 
+                 hover:text-gray-900 dark:hover:text-gray-100 mb-6 transition-colors"
+      >
         <ArrowLeft className="w-4 h-4 mr-1" />
         Back to Authors
       </Link>
 
-      <div className="bg-white shadow-sm rounded-lg border border-gray-200 p-6">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">Create New Author</h1>
+      <div
+        className="bg-white dark:bg-gray-800/30 shadow-sm rounded-xl 
+                    border border-gray-200 dark:border-gray-700/30 p-6
+                    backdrop-blur-sm"
+      >
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">Create New Author</h1>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Name</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Name</label>
             <input
               type="text"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm 
-                       focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-4 py-2 border border-gray-200 dark:border-gray-700/50 
+                       rounded-lg bg-white dark:bg-gray-800/50 
+                       text-gray-900 dark:text-gray-100
+                       focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400
+                       transition-colors backdrop-blur-sm"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Profile Image</label>
-            <div className="mt-1 flex items-center">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Profile Image</label>
+            <div className="mt-1 flex items-center gap-4">
               {imageFile ? (
-                <img src={URL.createObjectURL(imageFile)} alt="Preview" className="w-32 h-32 rounded-lg object-cover" />
+                <img
+                  src={URL.createObjectURL(imageFile)}
+                  alt="Preview"
+                  className="w-32 h-32 rounded-lg object-cover border
+                           border-gray-200 dark:border-gray-700/50"
+                />
               ) : (
                 <div
-                  className="w-32 h-32 border-2 border-gray-300 border-dashed rounded-lg 
-                               flex items-center justify-center"
+                  className="w-32 h-32 border-2 border-dashed 
+                             border-gray-300 dark:border-gray-700/50 rounded-lg 
+                             flex items-center justify-center bg-gray-50
+                             dark:bg-gray-800/30"
                 >
-                  <Upload className="w-8 h-8 text-gray-400" />
+                  <Upload className="w-8 h-8 text-gray-400 dark:text-gray-500" />
                 </div>
               )}
-              <div className="ml-5">
-                <input type="file" accept="image/*" onChange={handleImageChange} className="sr-only" id="image-upload" />
+              <div>
+                <input type="file" accept="image/*" onChange={handleImageChange} className="hidden" id="image-upload" />
                 <label
                   htmlFor="image-upload"
-                  className="cursor-pointer inline-flex items-center px-4 py-2 border 
-                           border-gray-300 shadow-sm text-sm font-medium rounded-md 
-                           text-gray-700 bg-white hover:bg-gray-50"
+                  className="inline-flex items-center px-4 py-2 border 
+                           border-gray-200 dark:border-gray-700/50 rounded-lg
+                           text-sm font-medium text-gray-700 dark:text-gray-200
+                           bg-white dark:bg-gray-800/50 hover:bg-gray-50 
+                           dark:hover:bg-gray-800/70 cursor-pointer
+                           transition-colors backdrop-blur-sm"
                 >
                   Choose Image
                 </label>
@@ -123,23 +144,26 @@ export default function NewAuthorPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Bio</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Bio</label>
             <textarea
               value={formData.bio}
               onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
               rows={4}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm 
-                       focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-4 py-2 border border-gray-200 dark:border-gray-700/50 
+                       rounded-lg bg-white dark:bg-gray-800/50 
+                       text-gray-900 dark:text-gray-100
+                       focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400
+                       transition-colors backdrop-blur-sm resize-y"
             />
           </div>
 
           <div className="flex justify-end pt-4">
             <button
               type="submit"
-              className="inline-flex items-center px-4 py-2 border border-transparent 
-                       rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 
-                       hover:bg-blue-700 focus:outline-none focus:ring-2 
-                       focus:ring-offset-2 focus:ring-blue-500"
+              className="px-6 py-2.5 bg-blue-500 dark:bg-blue-600 text-white 
+                       rounded-lg hover:bg-blue-600 dark:hover:bg-blue-700
+                       focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400
+                       transition-colors font-medium"
             >
               Create Author
             </button>
