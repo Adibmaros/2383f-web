@@ -33,7 +33,7 @@ export default function AdminDashboard() {
           <h3 className="text-gray-500 dark:text-gray-300 text-sm font-medium">Total Posts</h3>
           <p className="text-3xl font-bold text-gray-900 dark:text-gray-100 my-2">{stats.posts.length}</p>
           <Link
-            href="/admin/posts"
+            href="/admin-kelas/posts"
             className="text-blue-500 dark:text-blue-300 text-sm hover:text-blue-600 
                                            dark:hover:text-blue-200 transition-colors inline-flex items-center"
           >
@@ -47,7 +47,7 @@ export default function AdminDashboard() {
           <h3 className="text-gray-500 dark:text-gray-300 text-sm font-medium">Authors</h3>
           <p className="text-3xl font-bold text-gray-900 dark:text-gray-100 my-2">{stats.authors.length}</p>
           <Link
-            href="/admin/authors"
+            href="/admin-kelas/authors"
             className="text-blue-500 dark:text-blue-300 text-sm hover:text-blue-600 
                                              dark:hover:text-blue-200 transition-colors inline-flex items-center"
           >
@@ -61,7 +61,7 @@ export default function AdminDashboard() {
           <h3 className="text-gray-500 dark:text-gray-300 text-sm font-medium">Categories</h3>
           <p className="text-3xl font-bold text-gray-900 dark:text-gray-100 my-2">{stats.categories.length}</p>
           <Link
-            href="/admin/categories"
+            href="/admin-kelas/categories"
             className="text-blue-500 dark:text-blue-300 text-sm hover:text-blue-600 
                                                dark:hover:text-blue-200 transition-colors inline-flex items-center"
           >
@@ -75,21 +75,21 @@ export default function AdminDashboard() {
         <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-gray-100">Quick Actions</h2>
         <div className="flex flex-wrap gap-3 md:gap-4">
           <Link
-            href="/admin/posts/new"
+            href="/admin-kelas/posts/new"
             className="bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 
                          text-white px-4 py-2 rounded-lg transition-colors"
           >
             New Post
           </Link>
           <Link
-            href="/admin/authors/new"
+            href="/admin-kelas/authors/new"
             className="bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 
                          text-white px-4 py-2 rounded-lg transition-colors"
           >
             New Author
           </Link>
           <Link
-            href="/admin/categories/new"
+            href="/admin-kelas/categories/new"
             className="bg-purple-500 hover:bg-purple-600 dark:bg-purple-600 dark:hover:bg-purple-700 
                          text-white px-4 py-2 rounded-lg transition-colors"
           >
@@ -119,7 +119,7 @@ export default function AdminDashboard() {
                 </p>
               </div>
               <Link
-                href={`/admin/posts/${post.slug.current}/edit`}
+                href={`/admin-kelas/posts/${post.slug.current}/edit`}
                 className="text-blue-500 dark:text-blue-300 hover:text-blue-600 
                              dark:hover:text-blue-200 transition-colors"
               >
