@@ -5,10 +5,10 @@ import { Layout, FileText, Users, Tag, Menu, X } from "lucide-react";
 import { useState } from "react";
 
 const navItems = [
-  { href: "/admin", label: "Dashboard", icon: Layout },
-  { href: "/admin/posts", label: "Posts", icon: FileText },
-  { href: "/admin/authors", label: "Authors", icon: Users },
-  { href: "/admin/categories", label: "Categories", icon: Tag },
+  { href: "/admin-kelas", label: "Dashboard", icon: Layout },
+  { href: "/admin-kelas/posts", label: "Posts", icon: FileText },
+  { href: "/admin-kelas/authors", label: "Authors", icon: Users },
+  { href: "/admin-kelas/categories", label: "Categories", icon: Tag },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -22,7 +22,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
-              <Link href="/admin" className="flex items-center">
+              <Link href="/admin-kelas" className="flex items-center">
                 <span className="text-xl font-bold text-gray-900 dark:text-white">Admin Panel</span>
               </Link>
             </div>
