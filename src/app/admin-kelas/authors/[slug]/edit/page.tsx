@@ -79,7 +79,7 @@ export default function EditAuthorPage({ params }: any) {
       };
 
       await client.patch(formData._id).set(doc).commit();
-      router.push("/admin/authors");
+      router.push("/admin-kelas/authors");
     } catch (error) {
       console.error("Error updating author:", error);
       alert("Error updating author");
@@ -95,7 +95,7 @@ export default function EditAuthorPage({ params }: any) {
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">
       <Link
-        href="/admin/authors"
+        href="/admin-kelas/authors"
         className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 
                  hover:text-gray-700 dark:hover:text-gray-300 mb-6"
       >

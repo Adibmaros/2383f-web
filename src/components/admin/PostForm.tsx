@@ -20,7 +20,7 @@ export default function PostForm({ formTitle, formData, authors, categories, ima
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       <Link
-        href="/admin/posts"
+        href="/admin-kelas/posts"
         className="inline-flex items-center text-sm text-gray-500 
                  hover:text-gray-700 mb-6"
       >

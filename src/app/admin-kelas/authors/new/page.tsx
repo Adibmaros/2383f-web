@@ -58,7 +58,7 @@ export default function NewAuthorPage() {
       };
 
       await client.create(doc);
-      router.push("/admin/authors");
+      router.push("/admin-kelas/authors");
     } catch (error) {
       console.error("Error creating author:", error);
       alert("Error creating author");
@@ -75,7 +75,7 @@ export default function NewAuthorPage() {
   return (
     <div className="max-w-2xl mx-auto px-4 py-8 dark:border-gray-700 dark:shadow-xl">
       <Link
-        href="/admin/authors"
+        href="/admin-kelas/authors"
         className="inline-flex items-center text-sm text-gray-600 dark:text-gray-300 
                  hover:text-gray-900 dark:hover:text-gray-100 mb-6 transition-colors"
       >

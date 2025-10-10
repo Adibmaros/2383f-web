@@ -49,7 +49,7 @@ export default function EditCategoryPage({ params }: any) {
 
     try {
       await client.patch(formData._id).set(doc).commit();
-      router.push("/admin/categories");
+      router.push("/admin-kelas/categories");
     } catch (error) {
       console.error("Error updating category:", error);
       alert("Error updating category. Check console for details.");
@@ -59,7 +59,7 @@ export default function EditCategoryPage({ params }: any) {
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">
       <Link
-        href="/admin/categories"
+        href="/admin-kelas/categories"
         className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 
                  hover:text-gray-700 dark:hover:text-gray-300 mb-6"
       >

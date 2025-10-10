@@ -31,7 +31,7 @@ export default function PostsAdminPage() {
           <p className="mt-2 text-sm text-gray-700 dark:text-gray-300">Create, edit and manage your blog posts</p>
         </div>
         <Link
-          href="/admin/posts/new"
+          href="/admin-kelas/posts/new"
           className="mt-4 sm:mt-0 inline-flex items-center px-4 py-2 
                    bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 
                    dark:hover:bg-blue-600 text-white text-sm 
@@ -52,7 +52,7 @@ export default function PostsAdminPage() {
           >
             <p className="text-gray-500 dark:text-gray-400 mb-4">No posts found</p>
             <Link
-              href="/admin/posts/new"
+              href="/admin-kelas/posts/new"
               className="inline-flex items-center px-4 py-2 bg-blue-600 
                        dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 
                        text-white text-sm font-medium rounded-lg transition-all
@@ -108,7 +108,7 @@ export default function PostsAdminPage() {
                 </div>
                 <div className="mt-4 sm:mt-0 sm:ml-6 flex flex-shrink-0 gap-2">
                   <Link
-                    href={`/admin/posts/${post.slug.current}/edit`}
+                    href={`/admin-kelas/posts/${post.slug.current}/edit`}
                     className="inline-flex items-center px-3 py-2 border 
                              border-gray-300 dark:border-gray-600 rounded-lg 
                              text-sm font-medium text-gray-700 dark:text-gray-200 

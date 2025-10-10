@@ -31,7 +31,7 @@ export default function CategoriesPage() {
           <p className="mt-2 text-sm text-gray-700 dark:text-gray-300">Manage blog categories and organize your content</p>
         </div>
         <Link
-          href="/admin/categories/new"
+          href="/admin-kelas/categories/new"
           className="mt-4 sm:mt-0 inline-flex items-center px-4 py-2 
                    bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 
                    dark:hover:bg-blue-700 text-white text-sm font-medium 
@@ -50,7 +50,7 @@ export default function CategoriesPage() {
           >
             <p className="text-gray-500 dark:text-gray-400 mb-4">No categories found</p>
             <Link
-              href="/admin/categories/new"
+              href="/admin-kelas/categories/new"
               className="inline-flex items-center px-4 py-2 bg-blue-500 
                        hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 
                        text-white text-sm font-medium rounded-lg transition-colors"
@@ -98,7 +98,7 @@ export default function CategoriesPage() {
                           bg-gray-50/50 dark:bg-gray-800/20 p-3 flex justify-end gap-2"
               >
                 <Link
-                  href={`/admin/categories/${category.slug}/edit`}
+                  href={`/admin-kelas/categories/${category.slug}/edit`}
                   className="inline-flex items-center px-3 py-1.5 text-sm font-medium 
                            text-gray-700 dark:text-gray-300 hover:text-blue-600 
                            dark:hover:text-blue-400 transition-colors"

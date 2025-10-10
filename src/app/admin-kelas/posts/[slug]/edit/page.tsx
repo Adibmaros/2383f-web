@@ -91,7 +91,7 @@ export default function EditPostPage({ params }: any) {
     try {
       await client.patch(formData._id).set(doc).commit();
 
-      router.push("/admin/posts");
+      router.push("/admin-kelas/posts");
     } catch (error) {
       console.error("Error updating post:", error);
       alert("Error updating post. Check console for details.");

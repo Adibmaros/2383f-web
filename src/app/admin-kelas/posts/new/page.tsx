@@ -92,7 +92,7 @@ export default function NewPostPage() {
     try {
       const result = await client.create(doc);
       console.log("Created post:", result);
-      router.push("/admin/posts");
+      router.push("/admin-kelas/posts");
     } catch (error) {
       console.error("Error creating post:", error);
       alert("Error creating post. Check console for details.");

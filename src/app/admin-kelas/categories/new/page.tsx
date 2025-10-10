@@ -24,7 +24,7 @@ export default function NewCategoryPage() {
     };
 
     await client.create(doc);
-    router.push("/admin/categories");
+    router.push("/admin-kelas/categories");
   };
 
   return (

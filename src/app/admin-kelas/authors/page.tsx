@@ -31,7 +31,7 @@ export default function AuthorsPage() {
           <p className="mt-2 text-sm text-gray-700 dark:text-gray-300">Manage your blog authors and their details</p>
         </div>
         <Link
-          href="/admin/authors/new"
+          href="/admin-kelas/authors/new"
           className="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 
                    dark:bg-blue-500 dark:hover:bg-blue-600 text-white text-sm font-medium 
                    rounded-md shadow-sm transition-colors"
@@ -91,7 +91,7 @@ export default function AuthorsPage() {
                           bg-gray-50/50 dark:bg-gray-800/20 p-3 flex justify-end gap-2"
             >
               <Link
-                href={`/admin/authors/${author.slug.current}/edit`}
+                href={`/admin-kelas/authors/${author.slug.current}/edit`}
                 className="inline-flex items-center px-3 py-1.5 text-sm font-medium 
                          text-gray-700 dark:text-gray-300 hover:text-blue-600 
                          dark:hover:text-blue-400 transition-colors"
@@ -117,7 +117,7 @@ export default function AuthorsPage() {
         <div className="text-center py-12 bg-gray-50 dark:bg-gray-800 rounded-lg">
           <p className="text-gray-500 dark:text-gray-400 mb-4">No authors found</p>
           <Link
-            href="/admin/authors/new"
+            href="/admin-kelas/authors/new"
             className="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 
                      dark:bg-blue-500 dark:hover:bg-blue-600 text-white text-sm 
                      font-medium rounded-md"
