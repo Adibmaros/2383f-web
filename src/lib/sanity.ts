@@ -18,8 +18,71 @@ export const writeClient = client.withConfig({
 // Helper untuk generate URL gambar dari Sanity
 const builder = imageUrlBuilder(client);
 
+// Replace urlFor with a safe wrapper to avoid "Malformed asset _ref ''" runtime errors
+function isValidImageSource(src: any): boolean {
+  // null/undefined
+  if (!src) return false;
+
+  // string asset id like "image-...-jpg" or full url
+  if (typeof src === "string") {
+    // sanity image ids start with "image-"
+    if (src.trim().length === 0) return false;
+    return src.startsWith("image-") || src.includes("image-");
+  }
+
+  // object with asset._ref
+  if (src.asset && typeof src.asset._ref === "string" && src.asset._ref.trim().length > 0) {
+    return true;
+  }
+
+  // object with direct _ref (rare)
+  if (typeof src._ref === "string" && src._ref.trim().length > 0) {
+    return true;
+  }
+
+  return false;
+}
+
+// A lightweight, chainable fallback that mimics the shape used by callers: .width().height().url()
+function emptyImageBuilder() {
+  const chain: any = {
+    width() {
+      return chain;
+    },
+    height() {
+      return chain;
+    },
+    url() {
+      return "";
+    },
+    auto() {
+      return chain;
+    },
+    fit() {
+      return chain;
+    },
+    // maintain compatibility if some code calls .image() on returned value
+    image() {
+      return chain;
+    },
+  };
+  return chain;
+}
+
 export function urlFor(source: any) {
-  return builder.image(source);
+  // If the source is invalid (null/empty/malformed), return a safe chainable fallback
+  if (!isValidImageSource(source)) {
+    return emptyImageBuilder();
+  }
+
+  // Otherwise, try to build the URL normally, but guard against runtime errors
+  try {
+    return builder.image(source);
+  } catch (err) {
+    // Log for debugging but don't throw — return fallback to avoid crashing UI
+    console.warn("urlFor: failed to build image url for source:", source, err);
+    return emptyImageBuilder();
+  }
 }
 
 // Update return types and parameters for all functions

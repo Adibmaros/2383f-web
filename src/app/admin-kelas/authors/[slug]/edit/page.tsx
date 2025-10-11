@@ -7,7 +7,8 @@ import { use } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
-export default function EditAuthorPage({ params }: any) {
+export default function EditAuthorPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = use(params);
   const router = useRouter();
   const [formData, setFormData] = useState<any>({
     _id: "",
@@ -18,12 +19,14 @@ export default function EditAuthorPage({ params }: any) {
   const [imageFile, setImageFile] = useState<File | null>(null);
 
   useEffect(() => {
-    loadAuthor();
-  }, []);
+    if (resolvedParams.slug) {
+      loadAuthor(resolvedParams.slug);
+    }
+  }, [resolvedParams.slug]);
 
-  const loadAuthor = async () => {
+  const loadAuthor = async (slug: string) => {
     try {
-      const author = await getAuthorBySlug(params.slug);
+      const author = await getAuthorBySlug(slug);
       if (author) {
         setFormData({
           _id: author._id,
