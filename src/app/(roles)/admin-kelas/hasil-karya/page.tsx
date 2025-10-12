@@ -3,7 +3,16 @@
 import React, { useState } from "react";
 import { members } from "@/lib/data";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Karya, KaryaInput } from "@/types/karya";
+import { Karya } from "@/types/karya";
+
+// Define KaryaInput type locally if not exported from "@/types/karya"
+type KaryaInput = {
+  title: string;
+  description: string;
+  imageUrl: string;
+  link: string;
+  dibuatOleh: string;
+};
 import { uploadImage, deleteFile } from "@/lib/supabase";
 import { toast } from "sonner";
 
