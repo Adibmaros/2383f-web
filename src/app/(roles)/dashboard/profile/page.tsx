@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 import React, { useState, useMemo, Suspense, lazy } from "react";
 import { members } from "@/lib/data";
@@ -114,6 +115,24 @@ const ProfilePage: React.FC = () => {
                 focus:border-transparent transition-all duration-300
                 placeholder-gray-500 dark:placeholder-gray-400"
               />
+            </motion.div>
+
+            {/* Navigation Link to Karya Anggota */}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.55, duration: 0.5 }} className="mb-6">
+              <Link
+                href="/dashboard/karya-anggota"
+                className="inline-flex items-center px-6 py-2 text-sm sm:text-base
+                         bg-gradient-to-r from-indigo-500 to-purple-500 
+                         dark:from-indigo-400 dark:to-purple-400
+                         text-white font-medium rounded-full
+                         hover:shadow-lg hover:scale-105
+                         transition-all duration-300 ease-out"
+              >
+                Lihat Karya Anggota
+                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </Link>
             </motion.div>
 
             {/* Results Info */}
