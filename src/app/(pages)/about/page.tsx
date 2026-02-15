@@ -17,7 +17,7 @@ const ComponentLoading = () => (
 );
 
 const AboutPage: React.FC = () => {
-  // Animation variants
+  // Animation 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
