@@ -39,15 +39,20 @@ const ProfilePage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Responsive items per page
-  const getItemsPerPage = () => {
-    if (typeof window === "undefined") return 8;
-    if (window.innerWidth < 640) return 6; // Mobile: 6 items
-    if (window.innerWidth < 1024) return 8; // Tablet: 8 items
-    return 12; // Desktop: 12 items
-  };
+  const [itemsPerPage, setItemsPerPage] = useState(8); // Default to server-rendered value
 
-  const [itemsPerPage] = useState(getItemsPerPage());
+  // Update items per page on client side after hydration to prevent mismatch
+  React.useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) setItemsPerPage(6); // Mobile
+      else if (window.innerWidth < 1024) setItemsPerPage(8); // Tablet
+      else setItemsPerPage(12); // Desktop
+    };
+
+    handleResize(); // Set initial value on client
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Filter members based on search
   const filteredMembers = useMemo(() => {
@@ -185,9 +190,8 @@ const ProfilePage: React.FC = () => {
                     {index > 0 && array[index - 1] !== page - 1 && <span className="text-gray-400 text-sm">...</span>}
                     <button
                       onClick={() => setCurrentPage(page)}
-                      className={`px-3 sm:px-4 py-2 text-sm sm:text-base font-medium rounded-lg transition-all duration-200 ${
-                        currentPage === page ? "bg-indigo-500 text-white shadow-md" : "bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-indigo-200 dark:border-slate-600 hover:bg-indigo-50 dark:hover:bg-slate-700"
-                      }`}
+                      className={`px-3 sm:px-4 py-2 text-sm sm:text-base font-medium rounded-lg transition-all duration-200 ${currentPage === page ? "bg-indigo-500 text-white shadow-md" : "bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-indigo-200 dark:border-slate-600 hover:bg-indigo-50 dark:hover:bg-slate-700"
+                        }`}
                     >
                       {page}
                     </button>

@@ -3,6 +3,7 @@
 import { Providers } from "./providers";
 import "./globals.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import ChatWidget from "@/components/ChatWidget";
 
 const queryClient = new QueryClient();
 
@@ -17,7 +18,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <QueryClientProvider client={queryClient}>
           <Providers>
-            <div className="relative">{children}</div>
+            <div className="relative">
+              {children}
+              <ChatWidget />
+            </div>
           </Providers>
         </QueryClientProvider>
       </body>

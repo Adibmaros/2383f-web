@@ -11,7 +11,7 @@ const containerVariants: Variants = {
     scale: 1,
     transition: {
       duration: 0.5,
-      ease: easeInOut, // Use Framer Motion easing function
+      ease: easeInOut, 
     },
   },
 };
