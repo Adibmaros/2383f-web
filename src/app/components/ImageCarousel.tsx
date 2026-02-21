@@ -89,7 +89,7 @@ const ImageCarousel: React.FC<CarouselProps> = ({ images = defaultImages, autoPl
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       // Jangan intercept jika user sedang mengetik di input box (seperti chat)
-      if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName || '')) {
+      if (["INPUT", "TEXTAREA"].includes(document.activeElement?.tagName || "")) {
         return;
       }
 
@@ -233,8 +233,9 @@ const ImageCarousel: React.FC<CarouselProps> = ({ images = defaultImages, autoPl
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`transition-all duration-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${index === currentIndex ? "bg-blue-600 dark:bg-blue-400 w-8 sm:w-10 h-2.5 sm:h-3" : "bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500 w-2.5 sm:w-3 h-2.5 sm:h-3"
-              }`}
+            className={`transition-all duration-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
+              index === currentIndex ? "bg-blue-600 dark:bg-blue-400 w-8 sm:w-10 h-2.5 sm:h-3" : "bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500 w-2.5 sm:w-3 h-2.5 sm:h-3"
+            }`}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
@@ -260,8 +261,9 @@ const ImageCarousel: React.FC<CarouselProps> = ({ images = defaultImages, autoPl
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`flex-shrink-0 relative w-20 h-14 rounded-lg overflow-hidden transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 ${index === currentIndex ? "ring-2 ring-blue-500 scale-110" : "opacity-60 hover:opacity-100 hover:scale-105"
-              }`}
+            className={`flex-shrink-0 relative w-20 h-14 rounded-lg overflow-hidden transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+              index === currentIndex ? "ring-2 ring-blue-500 scale-110" : "opacity-60 hover:opacity-100 hover:scale-105"
+            }`}
           >
             {/* Optimized thumbnail images */}
             <Image
